@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="splash">#000E27</color>
+
+    <color name="travel_blue">#3A8DFF</color>
+    <color name="charcoal">#004D40</color>
+    <color name="charcoal_l1">#0B6A5D</color>
+    <color name="charcoal_l2">#1E8E7E</color>
+    <color name="red">#F50057</color>
+    <color name="gray">#36454F</color>
+    <color name="yellow">#FFEA00</color>
+    <color name="ghost_white">#F8F8FF</color>
+    <color name="snow">#FBFBFD</color>
+    <color name="white_gray">#8EA3A6</color>
+    <color name="black2">#424769</color>
+    <color name="charcoal_light">#3A8DFF</color>
+    <color name="transparent_white">#80FFFFFF</color>
+    <color name="liquid_color">#80E5E8EB</color>
+
+    <!-- Accent -->
+    <color name="accent">#26A69A</color>
+    <color name="gold">#C8A95A</color>
+
+    <!-- Background -->
+    <color name="background">#F7FAF9</color>
+    <color name="surface">#FFFFFF</color>
+
+    <!-- Glass -->
+    <color name="glass_white">#E6FFFFFF</color>
+    <color name="glass_light">#CCFFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_secondary">#707070</color>
+    <color name="text_hint">#9E9E9E</color>
+
+    <!-- Border -->
+    <color name="border">#D8D8D8</color>
+
+    <!-- Status -->
+    <color name="success">#2E7D32</color>
+    <color name="warning">#F9A825</color>
+    <color name="danger">#D32F2F</color>
+
+    <!-- Dashboard Cards -->
+    <color name="sales_card">#009688</color>
+    <color name="purchase_card">#1976D2</color>
+    <color name="stock_card">#FB8C00</color>
+    <color name="customer_card">#8E24AA</color>
+
+    <!-- Shadow -->
+    <color name="shadow">#22000000</color>
+    <!-- Primary Brand Colors -->
+    <color name="primary_dark">#00332A</color>
+    <color name="primary">#004D40</color>
+    <color name="primary_light">#00695C</color>
+
+    <color name="nav_bg_white">#FFFFFF</color>
+    <color name="nav_dark_teal">#0E3B36</color>
+    <color name="nav_dark_teal_light">#12463F</color>
+    <color name="nav_icon_inactive">#9AA5A3</color>
+    <color name="nav_text_inactive">#9AA5A3</color>
+    <color name="nav_icon_active_on_dark">#FFFFFF</color>
+    <color name="nav_shadow">#22000000</color>
+
+</resources>

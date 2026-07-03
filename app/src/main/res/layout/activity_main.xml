@@ -1,0 +1,167 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+    <!--  Outer root: fragment content fills the whole screen,
+             the nav bar floats on top of it, pinned to the bottom  -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--  Fragment container - THIS is where DashboardFragment etc. should go  -->
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!--  Bottom nav bar overlay  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/nav_bar_horizontal_margin"
+            android:layout_marginEnd="@dimen/nav_bar_horizontal_margin"
+            android:layout_marginBottom="16dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <com.example.ashraftraders.views.CurvedNavBackgroundView
+                android:id="@+id/curvedBackground"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/nav_bar_height"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/itemHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/curvedBackground"
+                app:layout_constraintHorizontal_bias="0.22"
+                app:layout_constraintStart_toStartOf="@id/curvedBackground"
+                app:layout_constraintTop_toTopOf="@id/curvedBackground">
+
+                <ImageView
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:src="@drawable/ic_nav_home" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="2dp"
+                    android:text="Home"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <!--   PRODUCTS   -->
+            <LinearLayout
+                android:id="@+id/itemProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="6dp"
+                app:layout_constraintBottom_toBottomOf="@id/curvedBackground"
+                app:layout_constraintEnd_toStartOf="@id/gridButton"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toEndOf="@id/itemHome"
+                app:layout_constraintTop_toTopOf="@id/curvedBackground">
+
+                <ImageView
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_nav_products" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="1dp"
+                    android:text="Products"
+                    android:textColor="@color/nav_text_inactive"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <!--   ORDERS   -->
+            <LinearLayout
+                android:id="@+id/itemOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/curvedBackground"
+                app:layout_constraintEnd_toStartOf="@id/itemProfile"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/gridButton"
+                app:layout_constraintTop_toTopOf="@id/curvedBackground">
+
+                <ImageView
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:src="@drawable/ic_nav_orders" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Orders"
+                    android:textColor="@color/nav_text_inactive"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <!--   PROFILE   -->
+            <LinearLayout
+                android:id="@+id/itemProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/curvedBackground"
+                app:layout_constraintEnd_toEndOf="@id/curvedBackground"
+                app:layout_constraintHorizontal_bias="0.78"
+                app:layout_constraintTop_toTopOf="@id/curvedBackground">
+
+                <ImageView
+                    android:layout_width="@dimen/nav_icon_size"
+                    android:layout_height="@dimen/nav_icon_size"
+                    android:src="@drawable/ic_nav_profile" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="2dp"
+                    android:text="Profile"
+                    android:textColor="@color/nav_text_inactive"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <!--   Elevated circular GRID button, floating above the bar in the middle.
+                              This is just a click target/button - NOT a fragment container.   -->
+            <FrameLayout
+                android:id="@+id/gridButton"
+                android:layout_width="@dimen/nav_grid_button_size"
+                android:layout_height="@dimen/nav_grid_button_size"
+                android:background="@drawable/bg_grid_button"
+                android:elevation="6dp"
+                app:layout_constraintBottom_toBottomOf="@id/curvedBackground"
+                app:layout_constraintEnd_toEndOf="@id/curvedBackground"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@id/curvedBackground"
+                app:layout_constraintTop_toTopOf="@id/curvedBackground"
+                app:layout_constraintVertical_bias="0.35">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_nav_grid" />
+            </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>
