@@ -64,5 +64,6 @@
     <color name="nav_text_inactive">#9AA5A3</color>
     <color name="nav_icon_active_on_dark">#FFFFFF</color>
     <color name="nav_shadow">#22000000</color>
+    <color name="glass_bg">#BABCD4</color>
 
 </resources>

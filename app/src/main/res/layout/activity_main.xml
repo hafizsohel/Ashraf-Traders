@@ -2,18 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data></data>
-    <!--  Outer root: fragment content fills the whole screen,
-             the nav bar floats on top of it, pinned to the bottom  -->
-    <FrameLayout
+     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--  Fragment container - THIS is where DashboardFragment etc. should go  -->
         <FrameLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <!--  Bottom nav bar overlay  -->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/curvedBottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -24,7 +21,6 @@
             android:clipToPadding="false">
 
             <com.example.ashraftraders.views.CurvedNavBackgroundView
-                android:id="@+id/curvedBackground"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/nav_bar_height"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -39,10 +35,10 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingHorizontal="4dp"
-                app:layout_constraintBottom_toBottomOf="@id/curvedBackground"
+                app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
                 app:layout_constraintHorizontal_bias="0.22"
-                app:layout_constraintStart_toStartOf="@id/curvedBackground"
-                app:layout_constraintTop_toTopOf="@id/curvedBackground">
+                app:layout_constraintStart_toStartOf="@id/curvedBottomNavigation"
+                app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation">
 
                 <ImageView
                     android:layout_width="@dimen/nav_icon_size"
@@ -66,11 +62,11 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingHorizontal="6dp"
-                app:layout_constraintBottom_toBottomOf="@id/curvedBackground"
+                app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
                 app:layout_constraintEnd_toStartOf="@id/gridButton"
                 app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toEndOf="@id/itemHome"
-                app:layout_constraintTop_toTopOf="@id/curvedBackground">
+                app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation">
 
                 <ImageView
                     android:layout_width="@dimen/nav_icon_size"
@@ -95,11 +91,11 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingHorizontal="4dp"
-                app:layout_constraintBottom_toBottomOf="@id/curvedBackground"
+                app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
                 app:layout_constraintEnd_toStartOf="@id/itemProfile"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@id/gridButton"
-                app:layout_constraintTop_toTopOf="@id/curvedBackground">
+                app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation">
 
                 <ImageView
                     android:layout_width="@dimen/nav_icon_size"
@@ -122,10 +118,10 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingHorizontal="4dp"
-                app:layout_constraintBottom_toBottomOf="@id/curvedBackground"
-                app:layout_constraintEnd_toEndOf="@id/curvedBackground"
+                app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
+                app:layout_constraintEnd_toEndOf="@id/curvedBottomNavigation"
                 app:layout_constraintHorizontal_bias="0.78"
-                app:layout_constraintTop_toTopOf="@id/curvedBackground">
+                app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation">
 
                 <ImageView
                     android:layout_width="@dimen/nav_icon_size"
@@ -147,13 +143,12 @@
                 android:id="@+id/gridButton"
                 android:layout_width="@dimen/nav_grid_button_size"
                 android:layout_height="@dimen/nav_grid_button_size"
-                android:background="@drawable/bg_grid_button"
                 android:elevation="6dp"
-                app:layout_constraintBottom_toBottomOf="@id/curvedBackground"
-                app:layout_constraintEnd_toEndOf="@id/curvedBackground"
+                app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
+                app:layout_constraintEnd_toEndOf="@id/curvedBottomNavigation"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@id/curvedBackground"
-                app:layout_constraintTop_toTopOf="@id/curvedBackground"
+                app:layout_constraintStart_toStartOf="@id/curvedBottomNavigation"
+                app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation"
                 app:layout_constraintVertical_bias="0.35">
 
                 <ImageView

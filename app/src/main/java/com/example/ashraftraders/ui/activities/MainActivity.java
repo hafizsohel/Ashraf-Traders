@@ -2,8 +2,10 @@ package com.example.ashraftraders.ui.activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.ashraftraders.R;
 import com.example.ashraftraders.databinding.ActivityMainBinding;
@@ -38,10 +40,36 @@ public class MainActivity extends AppCompatActivity {
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, new DashboardFragment())
                         .commit()
+
         );
+
+
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+
+            Fragment fragment = getSupportFragmentManager()
+                    .findFragmentById(R.id.fragmentContainer);
+
+            if (fragment instanceof DashboardFragment) {
+                showBottomNavigation();
+            } else {
+                hideBottomNavigation();
+            }
+        });
 
         // binding.itemProducts.setOnClickListener(...);
         // binding.itemOrders.setOnClickListener(...);
         // binding.itemProfile.setOnClickListener(...);
+
+    }
+    // এই মেথডটি MainActivity-তে যুক্ত করুন যেন ফ্র্যাগমেন্ট এটি খুঁজে পায়
+    public ActivityMainBinding getBinding() {
+        return binding;
+    }
+    public void hideBottomNavigation() {
+        binding.curvedBottomNavigation.setVisibility(View.GONE);
+    }
+
+    public void showBottomNavigation() {
+        binding.curvedBottomNavigation.setVisibility(View.VISIBLE);
     }
 }
