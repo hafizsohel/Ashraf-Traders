@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="নতুন পণ্য যোগ করুন"
+        android:textColor="#0B6A5D"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/> <com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+    app:boxStrokeColor="#0B6A5D"
+    app:hintTextColor="#0B6A5D">
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        android:id="@+id/etProductName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="পণ্যের নাম সিলেক্ট/টাইপ করুন"
+        android:completionThreshold="1"
+        android:inputType="textAutoComplete|text" />
+</com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:boxStrokeColor="#0B6A5D"
+        app:hintTextColor="#0B6A5D">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPurchasePrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ক্রয় মূল্য"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:boxStrokeColor="#0B6A5D"
+        app:hintTextColor="#0B6A5D">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="স্টক পরিমাণ"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmitProduct"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="সাবমিট করুন"
+        android:backgroundTint="#0B6A5D"
+        android:textColor="@android:color/white"
+        app:cornerRadius="8dp" />
+</LinearLayout>

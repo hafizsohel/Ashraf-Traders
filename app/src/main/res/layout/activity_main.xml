@@ -2,13 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data></data>
-     <FrameLayout
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <FrameLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/curvedBottomNavigation"
             android:layout_width="match_parent"
@@ -48,8 +51,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     android:layout_marginStart="2dp"
+                    android:layout_marginTop="4dp"
                     android:text="Home"
                     android:textColor="@android:color/white"
                     android:textSize="11sp" />
@@ -77,8 +80,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     android:layout_marginStart="1dp"
+                    android:layout_marginTop="4dp"
                     android:text="Products"
                     android:textColor="@color/nav_text_inactive"
                     android:textSize="11sp" />

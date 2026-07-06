@@ -22,7 +22,7 @@
             android:gravity="center_vertical"
             android:weightSum="10">
 
-            <!-- Product ID Badges (Dynamic Color Based on ID) -->
+            <!-- Product ID Badges -->
             <TextView
                 android:id="@+id/tvProductCode"
                 android:layout_width="0dp"
@@ -30,7 +30,7 @@
                 android:layout_weight="1.8"
                 android:text="P-1001"
                 android:textColor="#00796B"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:padding="6dp"
@@ -51,52 +51,48 @@
                     android:text="PVC Pipe 0.5 Inch"
                     android:textColor="#000000"
                     android:textStyle="bold"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/tvProductDesc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Standard Quality"
-                    android:textColor="#757575"
-                    android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Brand Name -->
+            <!-- Brand Name (Added layout_marginStart) -->
             <TextView
                 android:id="@+id/tvBrandName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
+                android:layout_marginStart="6dp"
                 android:text="RFL"
                 android:textColor="#303F9F"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:padding="4dp"
                 android:background="@drawable/bg_badge_blue" />
 
-            <!-- Purchase Price -->
+            <!-- Purchase Price (Added layout_marginStart) -->
             <TextView
                 android:id="@+id/tvPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2.0"
+                android:layout_marginStart="6dp"
                 android:text="৳140.00"
                 android:textColor="#2E7D32"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:gravity="center" />
 
-            <!-- Stock -->
+            <!-- Stock (Added layout_marginStart) -->
             <TextView
                 android:id="@+id/tvStock"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
+                android:layout_marginStart="6dp"
                 android:text="120"
                 android:textColor="#2E7D32"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:padding="4dp"

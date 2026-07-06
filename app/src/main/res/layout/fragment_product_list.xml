@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <!-- ভবিষ্যতে আপনার ভিউমডেল বা ডেটা এখানে বাইন্ড করতে পারবেন -->
-    </data>
+    <data></data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -13,198 +11,214 @@
         android:background="#004D40"
         tools:context=".ui.fragments.ProductListFragment">
 
-        <!-- Top App Bar / Header -->
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            app:elevation="0dp">
+            android:background="@color/charcoal_l1"
+            app:elevation="0dp"
+            app:liftOnScroll="false">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/ic_back"
-                app:title="Product List"
-                app:titleTextColor="@android:color/white">
+                android:background="@android:color/transparent">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="16dp">
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_back"
+                    app:tint="@android:color/white" />
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="16dp"
-                        android:src="@drawable/ic_search"
-                        app:tint="@android:color/white" />
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="48dp"
+                    android:background="@drawable/bg_search"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="Search Product" />
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_filter"
-                        app:tint="@android:color/white" />
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/ivFilter"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_filter"
+                    app:tint="@android:color/white" />
+
             </androidx.appcompat.widget.Toolbar>
+
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Main Content Card -->
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
+            android:background="@drawable/liquid_gradient_bg"
+            android:fillViewport="false"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_top_rounded"
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Summary Cards Grid (4 Columns) -->
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:alignmentMode="alignBounds"
                     android:columnCount="4"
-                    android:rowCount="1"
-                    android:alignmentMode="alignBounds">
+                    android:rowCount="1">
 
-                    <!-- Total Products -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:gravity="center"
                         android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ic_box"
                             android:background="@drawable/bg_badge_teal"
-                            android:padding="8dp"/>
+                            android:padding="8dp"
+                            android:src="@drawable/ic_box" />
+
                         <TextView
                             android:id="@+id/tvTotalProduct"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="236"
-                            android:textStyle="bold"
+                            android:layout_marginTop="4dp"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="16sp"
-                            android:layout_marginTop="4dp"/>
+                            android:textStyle="bold" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total Products"
-                            android:textSize="11sp"
+                            android:gravity="center"
+                            android:text="মোট পণ্য"
                             android:textColor="#757575"
-                            android:gravity="center"/>
+                            android:textSize="11sp" />
                     </LinearLayout>
 
-                    <!-- Brands -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:gravity="center"
                         android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ic_tag"
                             android:background="@drawable/bg_circle_blue"
-                            android:padding="8dp"/>
+                            android:padding="8dp"
+                            android:src="@drawable/ic_tag" />
+
                         <TextView
                             android:id="@+id/tvBrand"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2"
-                            android:textStyle="bold"
+                            android:layout_marginTop="4dp"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="16sp"
-                            android:layout_marginTop="4dp"/>
+                            android:textStyle="bold" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Brands"
-                            android:textSize="11sp"
+                            android:gravity="center"
+                            android:text="ব্র্যান্ড"
                             android:textColor="#757575"
-                            android:gravity="center"/>
+                            android:textSize="11sp" />
                     </LinearLayout>
 
-                    <!-- Total Purchase -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:gravity="center"
                         android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ic_taka"
                             android:background="@drawable/bg_circle_orange"
-                            android:padding="8dp"/>
+                            android:padding="8dp"
+                            android:src="@drawable/ic_taka" />
+
                         <TextView
                             android:id="@+id/tvTotalPurchase"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="৳245,320"
-                            android:textStyle="bold"
+                            android:layout_marginTop="4dp"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="13sp"
-                            android:layout_marginTop="4dp"/>
+                            android:textStyle="bold" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total Purchase"
-                            android:textSize="11sp"
+                            android:gravity="center"
+                            android:text="মোট ক্রয়"
                             android:textColor="#757575"
-                            android:gravity="center"/>
+                            android:textSize="11sp" />
                     </LinearLayout>
 
-                    <!-- Total Stock -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
                         android:gravity="center"
                         android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ic_chart"
                             android:background="@drawable/bg_circle_purple"
-                            android:padding="8dp"/>
+                            android:padding="8dp"
+                            android:src="@drawable/ic_chart" />
+
                         <TextView
                             android:id="@+id/tvTotalStock"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1,256"
-                            android:textStyle="bold"
+                            android:layout_marginTop="4dp"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="16sp"
-                            android:layout_marginTop="4dp"/>
+                            android:textStyle="bold" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total Stock"
-                            android:textSize="11sp"
+                            android:gravity="center"
+                            android:text="মোট স্টক"
                             android:textColor="#757575"
-                            android:gravity="center"/>
+                            android:textSize="11sp" />
                     </LinearLayout>
                 </GridLayout>
 
-                <!-- Table Header -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/bg_table_header"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="12dp"
                     android:weightSum="10">
@@ -216,14 +230,15 @@
                         android:gravity="center"
                         android:text="কোড ↕"
                         android:textColor="@android:color/white"
-                        android:textSize="12sp"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:layout_weight="3.2"
-                        android:gravity="center"
+                        android:gravity="start|center_vertical"
                         android:text="পণ্যের নাম ↕"
                         android:textColor="@android:color/white"
                         android:textSize="12sp"
@@ -232,74 +247,51 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
                         android:layout_weight="1.5"
                         android:gravity="center"
                         android:text="ব্র্যান্ড ↕"
                         android:textColor="@android:color/white"
-                        android:textSize="12sp"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
                         android:layout_weight="2.0"
                         android:gravity="center"
                         android:text="ক্রয় মূল্য ↕"
                         android:textColor="@android:color/white"
-                        android:textSize="12sp"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
                         android:layout_weight="1.5"
+                        android:gravity="center"
                         android:text="স্টক ↕"
                         android:textColor="@android:color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:gravity="center" />
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Product List RecyclerView -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvProducts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    tools:listitem="@layout/item_product_row"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="4"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                    tools:listitem="@layout/item_product_row" />
 
-                <!-- Pagination Bottom Bar -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:paddingBottom="70dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerInParent="true"
-                        android:text="Showing 1 to 10 of 236 products"
-                        android:textColor="#757575"
-                        android:textSize="12sp" />
-
-                    <!-- Pagination UI (Simplified) -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:orientation="horizontal">
-                        <!-- আপনার পেজিনেশন আইটেমসমূহ এখানে যুক্ত করতে পারেন -->
-                    </LinearLayout>
-                </RelativeLayout>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- Floating Action Button (+) -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAdd"
             android:layout_width="wrap_content"
@@ -307,9 +299,26 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_add"
-            app:backgroundTint="#004D40"
-            app:tint="@android:color/white"
-            app:fabSize="normal" />
+            app:backgroundTint="#0B6A5D"
+            app:fabSize="normal"
+            app:tint="@android:color/white" />
+
+        <FrameLayout
+            android:id="@+id/loadingOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFFFF"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateTint="#0B6A5D" />
+        </FrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

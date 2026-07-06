@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backgound_icon"
+        android:background="@drawable/liquid_gradient_bg"
         tools:context=".ui.fragments.DashboardFragment">
 
 
@@ -173,7 +173,7 @@
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/cardTotalProduct"
                                 android:layout_width="0dp"
-                                android:layout_height="170dp"
+                                android:layout_height="160dp"
                                 android:layout_weight="1"
                                 android:layout_margin="6dp">
 
@@ -186,7 +186,7 @@
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/cardTodaySales"
                                 android:layout_width="0dp"
-                                android:layout_height="170dp"
+                                android:layout_height="160dp"
                                 android:layout_weight="1"
                                 android:layout_margin="6dp">
 
@@ -205,7 +205,7 @@
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/cardTodayPurchase"
                                 android:layout_width="0dp"
-                                android:layout_height="170dp"
+                                android:layout_height="160dp"
                                 android:layout_weight="1"
                                 android:layout_margin="6dp">
 
@@ -218,7 +218,7 @@
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/cardLowStock"
                                 android:layout_width="0dp"
-                                android:layout_height="170dp"
+                                android:layout_height="160dp"
                                 android:layout_weight="1"
                                 android:layout_margin="6dp">
 

@@ -50,16 +50,20 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     // Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    // Gson
+    implementation (libs.gson)
+    // OkHttp
+    implementation (libs.logging.interceptor)
 
-// Gson
-    implementation ("com.google.code.gson:gson:2.10.1")
+    // Glide
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
 
-// OkHttp
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
-
-// Glide
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+    implementation (libs.room.runtime)
+    annotationProcessor (libs.room.compiler)
+    implementation (libs.room.ktx)
+    implementation (libs.lifecycle.livedata.ktx)
+    implementation (libs.lifecycle.viewmodel.ktx)
 }

@@ -6,32 +6,35 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.ashraftraders.data.model.DashboardModel;
 import com.example.ashraftraders.data.repository.DashboardRepository;
+import com.example.ashraftraders.data.room.ProductDao;
 
-import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
+import com.example.ashraftraders.data.room.ProductDao;
 
 public class DashboardViewModel extends ViewModel {
 
-    private final DashboardRepository repository;
+    private final ProductDao productDao;
 
-    private final MutableLiveData<List<DashboardModel>> dashboardData =
-            new MutableLiveData<>();
-
-    public DashboardViewModel() {
-
-        repository = new DashboardRepository();
-
+    // কনস্ট্রাক্টরে ProductDao ইনজেক্ট করা হয়েছে অফলাইন ডেটার জন্য
+    public DashboardViewModel(ProductDao productDao) {
+        this.productDao = productDao;
     }
 
-    public LiveData<List<DashboardModel>> getDashboardData() {
-
-        return dashboardData;
-
+    public LiveData<Integer> getTotalProducts() {
+        return productDao.getTotalProductsCount();
     }
 
-    public void loadDashboardStats() {
-
-        repository.getDashboardSummary(dashboardData);
-
+    public LiveData<Integer> getTotalBrands() {
+        return productDao.getTotalBrandsCount();
     }
 
+    public LiveData<Double> getTotalPurchase() {
+        return productDao.getTotalPurchaseAmount();
+    }
+
+    public LiveData<Integer> getLowStockCount() {
+        return productDao.getLowStockCount();
+    }
 }

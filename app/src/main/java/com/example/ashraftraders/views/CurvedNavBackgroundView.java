@@ -35,9 +35,9 @@ public class CurvedNavBackgroundView extends View {
     private void init() {
         whitePaint.setColor(Color.WHITE);
         whitePaint.setStyle(Paint.Style.FILL);
-        whitePaint.setShadowLayer(25f, 0f, 10f, Color.parseColor("#3326A69A"));
+        whitePaint.setShadowLayer(25f, 0f, 10f, Color.parseColor("#0B6A5D"));
 
-        tealPaint.setColor(Color.parseColor("#26A69A"));
+        tealPaint.setColor(Color.parseColor("#0B6A5D"));
         tealPaint.setStyle(Paint.Style.FILL);
 
         setLayerType(LAYER_TYPE_SOFTWARE, null);
@@ -82,17 +82,16 @@ public class CurvedNavBackgroundView extends View {
         homeWavePath.arcTo(0, 0, radius * 2, radius * 2, 180, 90, false);
         homeWavePath.close();
 
+        // মাঝখানের শেপটিকে একদম গোল (Perfect Circle) করার অংশ
         centerMenuPath.reset();
         float centerX = w / 2f;
         float centerY = h / 2f;
-        float menuBoxSize = h * 0.72f;
-        float menuRadius = menuBoxSize * 0.35f; // Perfect squircle rounded corners
-        float left = centerX - (menuBoxSize / 2f);
-        float top = centerY - (menuBoxSize / 2f);
-        float right = centerX + (menuBoxSize / 2f);
-        float bottom = centerY + (menuBoxSize / 2f);
 
-        centerMenuPath.addRoundRect(left, top, right, bottom, menuRadius, menuRadius, Path.Direction.CW);
+        // ভিউ এর হাইটের ওপর ভিত্তি করে বৃত্তের ব্যাসার্ধ (Radius) নির্ধারণ
+        float circleRadius = (h * 0.72f) / 2f;
+
+        // বৃত্ত আঁকার জন্য addCircle ব্যবহার করা হয়েছে
+        centerMenuPath.addCircle(centerX, centerY, circleRadius, Path.Direction.CW);
     }
 
     @Override

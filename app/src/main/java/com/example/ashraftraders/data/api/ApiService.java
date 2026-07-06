@@ -28,4 +28,12 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("rpc/product_list")
     Call<List<ProductModel>> getProductList();
+
+    // ১. সরাসরি টেবিল রাউটে পোস্ট করা (যদি টেবিলের নাম products হয়ে থাকে)
+    @Headers({
+            "Content-Type: application/json",
+            "Prefer: return=representation" // ইনসার্ট করার পর যেন নতুন তৈরি হওয়া ডেটা অবজেক্টটি ব্যাক করে
+    })
+    @POST("products") // আপনার Supabase টেবিলের নাম এখানে দিন (যেমন products)
+    Call<ProductModel> addProduct(@Body ProductModel product);
 }
