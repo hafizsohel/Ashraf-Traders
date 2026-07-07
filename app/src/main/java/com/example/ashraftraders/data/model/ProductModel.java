@@ -4,8 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProductModel {
 
+    // long এর বদলে অবজেক্ট টাইপ Long করা হলো যেন ডিফল্ট ০ না হয়ে null থাকে
     @SerializedName("id")
-    private long id;
+    private Long id;
 
     @SerializedName("product_code")
     private String product_code;
@@ -13,70 +14,76 @@ public class ProductModel {
     @SerializedName("product_name")
     private String productName;
 
+    // ডাটাবেজের int8 এর সাথে সামঞ্জস্য রেখে String থেকে Long করা হলো
     @SerializedName("brand_id")
-    private String brandId;
+    private Long brandId;
+
     @SerializedName("brand_name")
     private String brandName;
 
+    // double এর বদলে Double করা হলো যেন ডিফল্ট 0.0 না হয়ে null থাকে
     @SerializedName("purchase_price")
-    private double purchasePrice;
+    private Double purchasePrice;
 
+    // int এর বদলে Integer করা হলো যেন ডিফল্ট 0 না হয়ে null থাকে
     @SerializedName("stock")
-    private int stock;
+    private Integer stock;
 
-    public long getId() {
+    // --- Getters and Setters ---
+
+    public Long getId() {
         return id;
     }
 
-    public String getBrandId() {
-        return brandId;
-    }
-
-    public void setBrandId(String brandId) {
-        this.brandId = brandId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getProduct_code() {
         return product_code;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public double getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public void setProduct_code(String product_code) {
         this.product_code = product_code;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     public void setProductName(String productName) {
         this.productName = productName;
     }
 
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
     public void setBrandName(String brandName) {
         this.brandName = brandName;
     }
 
-    public void setPurchasePrice(double purchasePrice) {
+    public Double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(Double purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
-    public void setStock(int stock) {
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
@@ -86,6 +93,7 @@ public class ProductModel {
                 "id=" + id +
                 ", product_code='" + product_code + '\'' +
                 ", productName='" + productName + '\'' +
+                ", brandId=" + brandId +
                 ", brandName='" + brandName + '\'' +
                 ", purchasePrice=" + purchasePrice +
                 ", stock=" + stock +

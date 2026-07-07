@@ -1,67 +1,4 @@
 package com.example.ashraftraders.data.repository;
-/*
-
-import androidx.annotation.NonNull;
-import com.example.ashraftraders.data.api.ApiClient;
-import com.example.ashraftraders.data.api.ApiService;
-import com.example.ashraftraders.data.model.ProductModel;
-import java.util.List;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class ProductRepository {
-
-    private static final String TAG = "ProductRepository";
-
-    private final ApiService apiService;
-
-    public ProductRepository() {
-        apiService = ApiClient
-                .getClient()
-                .create(ApiService.class);
-    }
-
-    // Callback Interface
-    public interface OnProductsLoadedListener {
-        void onSuccess(List<ProductModel> products);
-        void onError(String message);
-    }
-
-    // Get Products
-    public void getProducts(OnProductsLoadedListener listener) {
-
-        apiService.getProductList().enqueue(new Callback<List<ProductModel>>() {
-
-            @Override
-            public void onResponse(@NonNull Call<List<ProductModel>> call,
-                                   @NonNull Response<List<ProductModel>> response) {
-
-                if (response.isSuccessful() && response.body() != null) {
-                    listener.onSuccess(response.body());
-
-                } else {
-                    String error = "Response Code : " + response.code();
-                    listener.onError(error);
-                }
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<ProductModel>> call,
-                                  @NonNull Throwable t) {
-                listener.onError(t.getMessage());
-            }
-        });
-
-    }
-
-}
-
-*/
-
-
-
 import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -89,6 +26,7 @@ public class ProductRepository {
     private final ApiService apiService;
     private final ProductDao productDao;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
+
 
     public ProductRepository(ProductDao productDao) {
         this.productDao = productDao;
@@ -128,50 +66,69 @@ public class ProductRepository {
     }
 
     public void fetchAndSyncProducts(OnSyncListener listener) {
+
         apiService.getProductList().enqueue(new Callback<List<ProductModel>>() {
+
             @Override
             public void onResponse(@NonNull Call<List<ProductModel>> call,
                                    @NonNull Response<List<ProductModel>> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
+
                     List<ProductModel> remoteProducts = response.body();
 
                     executor.execute(() -> {
+
                         try {
-                            List<ProductEntity> newEntities = ProductMapper.toEntityList(remoteProducts);
+                            productDao.deleteAll();
+                            productDao.insertAll(ProductMapper.toEntityList(remoteProducts));
 
-                            // [ফিক্স] সরাসরি productDao অথবা আপনার অ্যাপ ডেটাবেজের নিজস্ব রেফারেন্স থেকে ট্রানজেকশন রান করা হলো
-                            // এর জন্য কোনো ApiClient.getContext() লাগবে না।
-                            productDao.insertAll(newEntities);
-
-                            Log.d(TAG, "Sync Successful. Products updated smoothly: " + newEntities.size());
-                            if (listener != null) listener.onSyncSuccess();
+                            // Insert শেষ হওয়ার পর callback
+                            if (listener != null) {
+                                listener.onSyncSuccess();
+                            }
 
                         } catch (Exception e) {
-                            Log.e(TAG, "Database Write Error: " + e.getMessage());
-                            if (listener != null) listener.onSyncError("Database Error: " + e.getMessage());
+
+                            Log.e(TAG, "Database Error", e);
+
+                            if (listener != null) {
+                                listener.onSyncError(e.getMessage());
+                            }
                         }
+
                     });
 
                 } else {
-                    String error = "Server Response Code : " + response.code();
-                    Log.e(TAG, error);
-                    if (listener != null) listener.onSyncError(error);
+
+                    if (listener != null) {
+                        listener.onSyncError("Server Error : " + response.code());
+                    }
+
                 }
+
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<ProductModel>> call, @NonNull Throwable t) {
-                Log.e(TAG, "Network Failure: " + t.getMessage());
-                if (listener != null) listener.onSyncError(t.getMessage());
+            public void onFailure(@NonNull Call<List<ProductModel>> call,
+                                  @NonNull Throwable t) {
+
+                if (listener != null) {
+                    listener.onSyncError(t.getMessage());
+                }
+
             }
         });
+
     }
 
     public void addProduct(ProductModel product, OnSyncListener listener) {
         // ১. প্রথমে Retrofit API এর মাধ্যমে সার্ভারে ডাটা পাঠানো হচ্ছে
         // নোট: আপনার ApiService-এaddProduct(product) নামক একটি POST মেথড থাকতে হবে
-        apiService.addProduct(product).enqueue(new retrofit2.Callback<ProductModel>() {
+
+        String myAnonKey = "sb_publishable_8GLmErLipG89oDKeIcEpcw_wnTuSvv_";
+        String bearerToken = "Bearer " + myAnonKey;
+        apiService.addProduct(product).enqueue(new Callback<ProductModel>() {
             @Override
             public void onResponse(@NonNull retrofit2.Call<ProductModel> call,
                                    @NonNull retrofit2.Response<ProductModel> response) {
@@ -179,14 +136,16 @@ public class ProductRepository {
                 if (response.isSuccessful() && response.body() != null) {
                     ProductModel savedProduct = response.body();
 
-                    // ২. সার্ভারে সফলভাবে অ্যাড হওয়ার পর ব্যাকগ্রাউন্ড থ্রেডে লোকাল রুমে সেভ করা হচ্ছে
                     executor.execute(() -> {
                         try {
-                            // API মডেলকে Room Entity তে কনভার্ট করে ইনসার্ট
+                            // লোকাল রুমে সেভ করা হচ্ছে
                             productDao.insert(ProductMapper.toEntity(savedProduct));
 
+                            if (listener != null) {
+                                listener.onSyncSuccess();
+                            }
+                            Log.e("SUPABASE", response.errorBody().string());
                             if (listener != null) listener.onSyncSuccess();
-                            Log.d(TAG, "Product successfully saved to local Room DB");
                         } catch (Exception e) {
                             if (listener != null) listener.onSyncError(e.getMessage());
                         }

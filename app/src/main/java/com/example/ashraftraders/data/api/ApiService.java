@@ -9,6 +9,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -32,8 +33,10 @@ public interface ApiService {
     // ১. সরাসরি টেবিল রাউটে পোস্ট করা (যদি টেবিলের নাম products হয়ে থাকে)
     @Headers({
             "Content-Type: application/json",
-            "Prefer: return=representation" // ইনসার্ট করার পর যেন নতুন তৈরি হওয়া ডেটা অবজেক্টটি ব্যাক করে
+            "Prefer: return=representation"
     })
-    @POST("products") // আপনার Supabase টেবিলের নাম এখানে দিন (যেমন products)
-    Call<ProductModel> addProduct(@Body ProductModel product);
+    @POST("products")
+    Call<ProductModel> addProduct(
+            @Body ProductModel product
+    );
 }

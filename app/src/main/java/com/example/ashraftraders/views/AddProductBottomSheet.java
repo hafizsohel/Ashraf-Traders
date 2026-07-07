@@ -105,6 +105,7 @@ public class AddProductBottomSheet extends BottomSheetDialogFragment {
         });
     }
 
+
     // ইন্টারনেট চেক করার নিজস্ব মেথড
     private boolean isNetworkAvailable() {
         Context context = getContext();

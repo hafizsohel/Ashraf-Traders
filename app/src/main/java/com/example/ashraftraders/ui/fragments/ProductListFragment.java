@@ -2,6 +2,7 @@ package com.example.ashraftraders.ui.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,12 +54,14 @@ public class ProductListFragment extends Fragment {
         if (binding.loadingOverlay != null) binding.loadingOverlay.setVisibility(View.GONE);
         // ডেটা অবজার্ভার এবং ব্যাকগ্রাউন্ড সিঙ্ক চালু
         observeProducts();
-        viewModel.syncProductsFromServer();
+
+        viewModel.syncProducts();
 
         binding.btnBack.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
 
         // Floating Action Button (FAB) ক্লিকের লজিক
         binding.fabAdd.setOnClickListener(v -> {
+
             if (!isNetworkAvailable()) {
                 android.widget.Toast.makeText(requireContext(),
                         "ইন্টারনেট কানেকশন নেই! অফলাইনে নতুন পণ্য যোগ করা সম্ভব নয়।",
@@ -71,9 +74,8 @@ public class ProductListFragment extends Fragment {
                 public void onProductSubmit(ProductModel product) {
                     // [ম্যাজিক ফিক্স] ভিউমডেলের মাধ্যমে সার্ভার ও লোকাল রুমে ডেটা ইনসার্ট করা হচ্ছে
                     viewModel.addProductToServerAndRoom(product);
-
                     android.widget.Toast.makeText(requireContext(),
-                            product.getProductName() + " পসফলভাবে সাবমিট করা হয়েছে! ",
+                            product.getProductName() + " পণ্য সফলভাবে সাবমিট করা হয়েছে! ",
                             android.widget.Toast.LENGTH_SHORT).show();
                 }
             });
@@ -94,7 +96,9 @@ public class ProductListFragment extends Fragment {
         viewModel.getProducts().observe(getViewLifecycleOwner(), products -> {
             // [ফ্লিঙ্কারিং ফিক্স] যদি ডেটা এখনো না আসে বা নাল থাকে, তবে স্ক্রিনের ভিউ টাচই করবে না।
             // এর ফলে এক্সএমএল বা পূর্বের স্ট্যাটিক ডেটা বিন্দুমাত্র লাফালাফি করার সুযোগ পাবে না।
+            Log.d("UI", "Products = " + (products == null ? 0 : products.size()));
             if (products == null || products.isEmpty()) return;
+            adapter.updateData(products);
             updateUI(products);
         });
     }

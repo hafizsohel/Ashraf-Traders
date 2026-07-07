@@ -16,6 +16,12 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private final List<ProductModel> productList = new ArrayList<>();
+    // এই মেথডটি নতুন ডাটা পাওয়ার সাথে সাথে লিস্ট রিফ্রেশ করবে
+    public void updateData(List<ProductModel> newProducts) {
+        this.productList.clear();
+        this.productList.addAll(newProducts);
+        notifyDataSetChanged(); // এটি রিয়েল-টাইম ভিউ আপডেট করতে বাধ্য করবে
+    }
 
     public void setProducts(List<ProductModel> list) {
         productList.clear();

@@ -118,6 +118,7 @@ public class ProductViewModel extends ViewModel {
 
 
 import androidx.lifecycle.MediatorLiveData;
+
 public class ProductViewModel extends ViewModel {
 
     private final ProductRepository repository;
@@ -144,6 +145,7 @@ public class ProductViewModel extends ViewModel {
 
         // ডেটাবেজের লাইভ-ডেটা সোর্সের সাথে সিঙ্ক করা (সবচেয়ে নিরাপদ ও আধুনিক নিয়ম)
         productList.addSource(repository.getAllProducts(), products -> {
+            Log.d("ROOM", "Products = " + (products == null ? 0 : products.size()));
             originalProducts.clear();
             if (products != null) {
                 originalProducts.addAll(products);
@@ -169,21 +171,41 @@ public class ProductViewModel extends ViewModel {
     // ==========================================
     // ১. অনলাইন থেকে ডেটা এনে অফলাইনে সিঙ্ক করা
     // ==========================================
-    public void syncProductsFromServer() {
-        isLoading.setValue(true);
-        errorMessage.setValue(null);
+    public interface AddProductListener {
+        void onSuccess();
 
-        repository.fetchAndSyncProducts(new ProductRepository.OnSyncListener() {
+        void onError(String message);
+    }
+
+    public void addProductToServerAndRoom(ProductModel product) {
+
+        isLoading.setValue(true);
+
+        repository.addProduct(product, new ProductRepository.OnSyncListener() {
+
             @Override
             public void onSyncSuccess() {
-                // সিঙ্ক সফল হলে UI-তে প্রোগ্রেসবার অফ হবে
-                isLoading.postValue(false);
+
+                repository.fetchAndSyncProducts(new ProductRepository.OnSyncListener() {
+
+                    @Override
+                    public void onSyncSuccess() {
+                        isLoading.postValue(false);
+                    }
+
+                    @Override
+                    public void onSyncError(String message) {
+                        isLoading.postValue(false);
+
+                    }
+                });
             }
 
             @Override
             public void onSyncError(String message) {
+
                 isLoading.postValue(false);
-                errorMessage.postValue(message);
+
             }
         });
     }
@@ -304,19 +326,21 @@ public class ProductViewModel extends ViewModel {
         productList.setValue(filtered);
     }
 
-    public void addProductToServerAndRoom(ProductModel product) {
-        // রেপোজিটরিকে বলা হচ্ছে ডেটা সিঙ্ক ও ইনসার্ট করতে
-        repository.addProduct(product, new ProductRepository.OnSyncListener() {
+    public void syncProducts() {
+
+        isLoading.setValue(true);
+
+        repository.fetchAndSyncProducts(new ProductRepository.OnSyncListener() {
             @Override
             public void onSyncSuccess() {
-                // সিঙ্ক সফল হলে মেসেজ বা অন্য কোনো স্টেট হ্যান্ডেল করতে পারেন
-                Log.d("ProductViewModel", "Product added and synced successfully!");
+                isLoading.postValue(false);
             }
 
             @Override
             public void onSyncError(String message) {
-                Log.e("ProductViewModel", "Failed to add product: " + message);
+                isLoading.postValue(false);
             }
         });
     }
+
 }
