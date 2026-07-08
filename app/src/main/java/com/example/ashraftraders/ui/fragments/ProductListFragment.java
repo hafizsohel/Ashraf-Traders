@@ -73,6 +73,7 @@ public class ProductListFragment extends Fragment {
                 @Override
                 public void onProductSubmit(ProductModel product) {
                     // [ম্যাজিক ফিক্স] ভিউমডেলের মাধ্যমে সার্ভার ও লোকাল রুমে ডেটা ইনসার্ট করা হচ্ছে
+                   // viewModel.addProductToServerAndRoom(product);
                     viewModel.addProductToServerAndRoom(product);
                     android.widget.Toast.makeText(requireContext(),
                             product.getProductName() + " পণ্য সফলভাবে সাবমিট করা হয়েছে! ",
@@ -97,7 +98,10 @@ public class ProductListFragment extends Fragment {
             // [ফ্লিঙ্কারিং ফিক্স] যদি ডেটা এখনো না আসে বা নাল থাকে, তবে স্ক্রিনের ভিউ টাচই করবে না।
             // এর ফলে এক্সএমএল বা পূর্বের স্ট্যাটিক ডেটা বিন্দুমাত্র লাফালাফি করার সুযোগ পাবে না।
             Log.d("UI", "Products = " + (products == null ? 0 : products.size()));
-            if (products == null || products.isEmpty()) return;
+
+            if (products == null) {
+                return;
+            }
             adapter.updateData(products);
             updateUI(products);
         });

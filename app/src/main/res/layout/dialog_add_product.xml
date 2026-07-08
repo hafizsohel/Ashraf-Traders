@@ -14,48 +14,79 @@
         android:textColor="#0B6A5D"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp"/> <com.google.android.material.textfield.TextInputLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-    app:boxStrokeColor="#0B6A5D"
-    app:hintTextColor="#0B6A5D">
-    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-        android:id="@+id/etProductName"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Product Name -->
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="পণ্যের নাম সিলেক্ট/টাইপ করুন"
-        android:completionThreshold="1"
-        android:inputType="textAutoComplete|text" />
-</com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginBottom="12dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        app:boxStrokeColor="#0B6A5D"
+        app:hintTextColor="#0B6A5D">
 
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/etProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="পণ্যের নাম সিলেক্ট/টাইপ করুন"
+            android:completionThreshold="1"
+            android:inputType="textAutoComplete|text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Brand Name -->
+    <!-- Brand Name Dropdown -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        app:boxStrokeColor="#0B6A5D"
+        app:hintTextColor="#0B6A5D">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/etBrandName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ব্র্যান্ড সিলেক্ট/টাইপ করুন"
+            android:completionThreshold="1"
+            android:inputType="textAutoComplete|text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Purchase Price -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         app:boxStrokeColor="#0B6A5D"
         app:hintTextColor="#0B6A5D">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPurchasePrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ক্রয় মূল্য"
             android:inputType="numberDecimal" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Stock -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         app:boxStrokeColor="#0B6A5D"
         app:hintTextColor="#0B6A5D">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etStock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="স্টক পরিমাণ"
             android:inputType="number" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -66,4 +97,5 @@
         android:backgroundTint="#0B6A5D"
         android:textColor="@android:color/white"
         app:cornerRadius="8dp" />
+
 </LinearLayout>

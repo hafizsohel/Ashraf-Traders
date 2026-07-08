@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="4dp"
-                    android:text="Home"
+                    android:text="হোম"
                     android:textColor="@android:color/white"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="4dp"
-                    android:text="Products"
+                    android:text="পণ্য"
                     android:textColor="@color/nav_text_inactive"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -109,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Orders"
+                    android:text="বিক্রয়"
                     android:textColor="@color/nav_text_inactive"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -136,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="2dp"
-                    android:text="Profile"
+                    android:text="প্রোফাইল"
                     android:textColor="@color/nav_text_inactive"
                     android:textSize="11sp" />
             </LinearLayout>

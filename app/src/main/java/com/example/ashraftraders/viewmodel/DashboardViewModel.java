@@ -1,15 +1,6 @@
 package com.example.ashraftraders.viewmodel;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
-import com.example.ashraftraders.data.model.DashboardModel;
-import com.example.ashraftraders.data.repository.DashboardRepository;
-import com.example.ashraftraders.data.room.ProductDao;
-
-
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.ashraftraders.data.room.ProductDao;
 

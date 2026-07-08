@@ -1,5 +1,6 @@
 package com.example.ashraftraders.data.api;
 
+import com.example.ashraftraders.data.model.BrandModel;
 import com.example.ashraftraders.data.model.DashboardModel;
 import com.example.ashraftraders.data.model.LoginRequest;
 import com.example.ashraftraders.data.model.ProductModel;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -39,4 +41,6 @@ public interface ApiService {
     Call<ProductModel> addProduct(
             @Body ProductModel product
     );
+    @GET("brands?select=*")
+    Call<List<BrandModel>> getBrands();
 }
