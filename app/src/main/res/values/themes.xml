@@ -11,9 +11,12 @@
         <item name="cornerSize">50%</item>
     </style>
     <style name="NavIndicatorShape">
-
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
 
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_scale_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_scale_out</item>
     </style>
 </resources>

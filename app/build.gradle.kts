@@ -66,4 +66,7 @@ dependencies {
     implementation (libs.room.ktx)
     implementation (libs.lifecycle.livedata.ktx)
     implementation (libs.lifecycle.viewmodel.ktx)
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 }

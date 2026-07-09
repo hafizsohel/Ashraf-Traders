@@ -4,14 +4,13 @@ import com.example.ashraftraders.data.model.BrandModel;
 import com.example.ashraftraders.data.model.DashboardModel;
 import com.example.ashraftraders.data.model.LoginRequest;
 import com.example.ashraftraders.data.model.ProductModel;
-import com.example.ashraftraders.data.model.User;
+import com.example.ashraftraders.data.model.UserModel;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -21,7 +20,7 @@ public interface ApiService {
             "Content-Type: application/json"
     })
     @POST("rpc/login_user")
-    Call<List<User>> login(
+    Call<List<UserModel>> login(
             @Body LoginRequest request
     );
     @Headers("Content-Type: application/json")

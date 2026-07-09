@@ -1,27 +1,37 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data></data>
+    <data>
 
-    <FrameLayout
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Fragment Container -->
         <FrameLayout
             android:id="@+id/fragmentContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/curvedBottomNavigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Bottom Navigation -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/curvedBottomNavigation"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
             android:layout_marginStart="@dimen/nav_bar_horizontal_margin"
             android:layout_marginEnd="@dimen/nav_bar_horizontal_margin"
             android:layout_marginBottom="16dp"
             android:clipChildren="false"
-            android:clipToPadding="false">
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.example.ashraftraders.views.CurvedNavBackgroundView
                 android:layout_width="0dp"
@@ -33,13 +43,12 @@
 
             <LinearLayout
                 android:id="@+id/itemHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="49dp"
+                android:layout_height="41dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingHorizontal="4dp"
                 app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
-                app:layout_constraintHorizontal_bias="0.22"
                 app:layout_constraintStart_toStartOf="@id/curvedBottomNavigation"
                 app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation">
 
@@ -161,5 +170,5 @@
                     android:src="@drawable/ic_nav_grid" />
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

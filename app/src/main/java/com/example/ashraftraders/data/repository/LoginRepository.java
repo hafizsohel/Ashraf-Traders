@@ -4,7 +4,7 @@ package com.example.ashraftraders.data.repository;
 import com.example.ashraftraders.data.api.ApiClient;
 import com.example.ashraftraders.data.api.ApiService;
 import com.example.ashraftraders.data.model.LoginRequest;
-import com.example.ashraftraders.data.model.User;
+import com.example.ashraftraders.data.model.UserModel;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class LoginRepository {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
 
-    public Call<List<User>> login(String username, String password) {
+    public Call<List<UserModel>> login(String username, String password) {
 
         return apiService.login(
                 new LoginRequest(username, password)

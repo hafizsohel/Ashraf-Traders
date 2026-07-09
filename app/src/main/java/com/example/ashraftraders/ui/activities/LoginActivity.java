@@ -3,6 +3,7 @@ package com.example.ashraftraders.ui.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -55,13 +56,15 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             viewModel.login(
-                    binding.etUsername.getText().toString().trim(), binding.etPassword.getText().toString().trim()
+                    binding.etUsername.getText().toString().trim(),
+                    binding.etPassword.getText().toString().trim()
             );
 
         });
 
         viewModel.getLoginSuccess().observe(this, user -> {
-            session.saveLogin(user.getId(), user.getUsername(), user.getRole());
+            //Log.d("LOGIN", "Profile Image = " + );
+            session.saveLogin(user.getId(), user.getUsername(),user.getFull_name(), user.getRole(),user.getProfileImage());
 
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

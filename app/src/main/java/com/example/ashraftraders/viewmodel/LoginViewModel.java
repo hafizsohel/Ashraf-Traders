@@ -1,10 +1,12 @@
 package com.example.ashraftraders.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.ashraftraders.data.model.User;
+import com.example.ashraftraders.data.model.UserModel;
 import com.example.ashraftraders.data.repository.LoginRepository;
 
 import java.util.List;
@@ -17,11 +19,11 @@ public class LoginViewModel extends ViewModel {
 
     private final LoginRepository repository = new LoginRepository();
 
-    private final MutableLiveData<User> loginSuccess = new MutableLiveData<>();
+    private final MutableLiveData<UserModel> loginSuccess = new MutableLiveData<>();
 
     private final MutableLiveData<String> error = new MutableLiveData<>();
 
-    public LiveData<User> getLoginSuccess() {
+    public LiveData<UserModel> getLoginSuccess() {
         return loginSuccess;
     }
 
@@ -51,13 +53,12 @@ public class LoginViewModel extends ViewModel {
         }
 
         repository.login(username, password)
-                .enqueue(new Callback<List<User>>() {
+                .enqueue(new Callback<List<UserModel>>() {
 
                     @Override
-                    public void onResponse(Call<List<User>> call,
-                                           Response<List<User>> response) {
-
-                        if (response.isSuccessful()
+                    public void onResponse(Call<List<UserModel>> call,
+                                           Response<List<UserModel>> response) {
+                           if (response.isSuccessful()
                                 && response.body() != null
                                 && !response.body().isEmpty()) {
 
@@ -72,7 +73,7 @@ public class LoginViewModel extends ViewModel {
                     }
 
                     @Override
-                    public void onFailure(Call<List<User>> call, Throwable t) {
+                    public void onFailure(Call<List<UserModel>> call, Throwable t) {
 
                         error.postValue(t.getMessage());
 
