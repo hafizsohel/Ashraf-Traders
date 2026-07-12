@@ -31,7 +31,6 @@ public interface ApiService {
     @POST("rpc/product_list")
     Call<List<ProductModel>> getProductList();
 
-    // ১. সরাসরি টেবিল রাউটে পোস্ট করা (যদি টেবিলের নাম products হয়ে থাকে)
     @Headers({
             "Content-Type: application/json",
             "Prefer: return=representation"

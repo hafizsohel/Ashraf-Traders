@@ -11,6 +11,7 @@ import com.example.ashraftraders.R;
 import com.example.ashraftraders.databinding.ActivityMainBinding;
 import com.example.ashraftraders.ui.fragments.DashboardFragment;
 import com.example.ashraftraders.ui.fragments.ProductFragment;
+import com.example.ashraftraders.ui.fragments.ProductListFragment;
 import com.example.ashraftraders.ui.fragments.ProfileFragment;
 import com.example.ashraftraders.ui.fragments.SalesFragment;
 
@@ -47,11 +48,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.itemProducts.setOnClickListener(v -> {
-            loadFragment(new ProductFragment());
+            loadFragment(new ProductListFragment());
         });
-        binding.itemOrders.setOnClickListener(v -> {
+        binding.itemSales.setOnClickListener(v -> {
             loadFragment(new SalesFragment());
         });
+
+        // 👇 এখানে লিখবেন
+        getOnBackPressedDispatcher().addCallback(this,
+                new androidx.activity.OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        if (getSupportFragmentManager().findFragmentById(R.id.fragmentContainer)
+                                instanceof DashboardFragment) {
+                            finish();
+                        } else {
+                            loadFragment(new DashboardFragment());
+                        }
+                    }
+                });
 
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
 
@@ -96,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
                         R.anim.no_anim      // Pop Exit
                 )
                 .replace(R.id.fragmentContainer, fragment)
+               // .addToBackStack(fragment.getClass().getSimpleName())
                 .commit();
+    }
+    public void openHome() {
+        loadFragment(new DashboardFragment());
     }
 }

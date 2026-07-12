@@ -47,7 +47,7 @@
                 android:layout_height="41dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:paddingHorizontal="4dp"
+                android:paddingHorizontal="8dp"
                 app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
                 app:layout_constraintStart_toStartOf="@id/curvedBottomNavigation"
                 app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation">
@@ -68,7 +68,7 @@
             </LinearLayout>
             <!--   PRODUCTS   -->
             <LinearLayout
-                android:id="@+id/itemProducts"
+                android:id="@+id/itemSales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -84,20 +84,20 @@
                     android:layout_width="@dimen/nav_icon_size"
                     android:layout_height="@dimen/nav_icon_size"
                     android:layout_marginStart="2dp"
-                    android:src="@drawable/ic_nav_products" />
+                    android:src="@drawable/ic_nav_orders" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="4dp"
-                    android:text="পণ্য"
+                    android:text="বিক্রয়"
                     android:textColor="@color/nav_text_inactive"
                     android:textSize="11sp" />
             </LinearLayout>
             <!--   ORDERS   -->
             <LinearLayout
-                android:id="@+id/itemOrders"
+                android:id="@+id/itemProducts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -112,13 +112,13 @@
                 <ImageView
                     android:layout_width="@dimen/nav_icon_size"
                     android:layout_height="@dimen/nav_icon_size"
-                    android:src="@drawable/ic_nav_orders" />
+                    android:src="@drawable/ic_nav_products" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="বিক্রয়"
+                    android:text="মজুদ"
                     android:textColor="@color/nav_text_inactive"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -166,8 +166,18 @@
                 <ImageView
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginTop="12dp"
                     android:src="@drawable/ic_nav_grid" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="6dp"
+                    android:text="দ্রুত কাজ"
+                    android:textSize="10sp"
+                    android:textColor="#FFFFFF" />
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

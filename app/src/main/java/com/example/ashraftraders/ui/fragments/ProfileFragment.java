@@ -21,6 +21,8 @@ import com.example.ashraftraders.R;
 import com.example.ashraftraders.databinding.FragmentProfileBinding;
 import com.example.ashraftraders.session.SessionManager;
 import com.example.ashraftraders.ui.activities.LoginActivity;
+import com.example.ashraftraders.ui.activities.MainActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
@@ -55,7 +57,11 @@ public class ProfileFragment extends Fragment {
         binding.tvFullName.setText(sessionManager.getFullName());
         binding.tvRoll.setText(sessionManager.getRole());
 
-       // Log.d("PROFILE_IMAGE", "URL = " + sessionManager.getProfileImage());
+
+        binding.ivBack.setOnClickListener(v -> {
+            ((MainActivity) requireActivity()).openHome();
+        });
+
 
         Glide.with(requireContext())
                 .load(sessionManager.getProfileImage())

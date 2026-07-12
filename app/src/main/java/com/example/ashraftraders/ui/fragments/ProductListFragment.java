@@ -132,9 +132,12 @@ public class ProductListFragment extends Fragment {
     }
 
     private void setupSearchView() {
-        binding.searchView.setIconifiedByDefault(false);
-        binding.searchView.setIconified(false);
         binding.searchView.setQueryHint("Search Product");
+        // Default এ focus থাকবে না
+        binding.searchView.clearFocus();
+        binding.searchView.setFocusable(false);
+        binding.searchView.setIconifiedByDefault(false);
+        binding.searchView.setIconified(true);
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

@@ -66,4 +66,43 @@
     <color name="nav_shadow">#22000000</color>
     <color name="glass_bg">#BABCD4</color>
 
+
+        <color name="dashboard_bg">#F7F7F7</color> <!-- Light grey background -->
+        <color name="date_text_color">#A0A0A0</color> <!-- date/sub header greys -->
+        <color name="sub_header_text">#616161</color>
+        <color name="see_all_text">#4CAF50</color> <!-- green for see all and trends -->
+        <color name="trend_green">#4CAF50</color>
+        <color name="trend_red">#F44336</color> <!-- red for trend -->
+        <color name="due_status_bg">#FFF3F2</color> <!-- red hue for due background in list -->
+        <color name="due_text_red">#F44336</color>
+        <color name="paid_status_bg">#E0F2F1</color> <!-- green hue for paid background in list -->
+        <color name="paid_text_green">#4CAF50</color>
+
+        <!-- আইকনের রঙের সংজ্ঞা, এগুলি ড্রয়েবলে ব্যবহার করবেন -->
+        <color name="green_icon_tint">#4CAF50</color>
+        <color name="blue_icon_tint">#2196F3</color>
+        <color name="orange_icon_tint">#FF9800</color>
+        <color name="purple_icon_tint">#9C27B0</color>
+        <color name="red_icon_tint">#F44336</color>
+        <!-- ড্রয়েবল বা ডিজাইনের জন্য আপনি এই নামগুলো ব্যবহার করতে পারেন -->
+
+    <color name="card_bg_sale">#F4FBF7</color>
+    <color name="card_stroke_sale">#E2F5EC</color>
+    <color name="card_icon_sale">#10A375</color>
+
+    <color name="card_bg_list">#F4F8FF</color>
+    <color name="card_stroke_list">#E2EDFF</color>
+    <color name="card_icon_list">#1A73E8</color>
+
+    <color name="card_bg_due">#FFF9F2</color>
+    <color name="card_stroke_due">#FFEAD2</color>
+    <color name="card_icon_due">#FF8C00</color>
+
+    <color name="card_bg_return">#FFF4F4</color>
+    <color name="card_stroke_return">#FFE2E2</color>
+    <color name="card_icon_return">#F44336</color>
+
+    <color name="text_main">#1A1A1A</color>
+    <color name="text_sub">#666666</color>
+
 </resources>

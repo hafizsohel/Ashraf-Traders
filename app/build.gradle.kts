@@ -5,7 +5,7 @@ plugins {
 android {
     namespace = "com.example.ashraftraders"
     compileSdk {
-        version = release(36) {
+        version = release(37) {
             minorApiLevel = 1
         }
     }
@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.google.material)
+    implementation ("androidx.core:core-ktx:1.19.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
