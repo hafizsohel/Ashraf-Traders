@@ -1,8 +1,6 @@
-package com.example.ashraftraders.data.room;
+package com.example.ashraftraders.data.room.entity;
 
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

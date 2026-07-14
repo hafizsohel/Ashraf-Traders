@@ -58,6 +58,7 @@ public class ProfileFragment extends Fragment {
         binding.tvRoll.setText(sessionManager.getRole());
 
 
+
         binding.ivBack.setOnClickListener(v -> {
             ((MainActivity) requireActivity()).openHome();
         });

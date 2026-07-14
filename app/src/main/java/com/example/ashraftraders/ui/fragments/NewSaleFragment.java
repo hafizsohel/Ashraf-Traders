@@ -1,66 +1,149 @@
 package com.example.ashraftraders.ui.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Toast;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.ashraftraders.R;
+import com.example.ashraftraders.adapters.SaleProductAdapter;
+import com.example.ashraftraders.data.model.CartMapper;
+import com.example.ashraftraders.data.repository.CartRepository;
+import com.example.ashraftraders.data.repository.ProductRepository;
+import com.example.ashraftraders.data.room.AppDatabase;
+import com.example.ashraftraders.databinding.FragmentNewSaleBinding;
+import com.example.ashraftraders.viewmodel.CartViewModel;
+import com.example.ashraftraders.viewmodel.CartViewModelFactory;
+import com.example.ashraftraders.viewmodel.ProductViewModel;
+import com.example.ashraftraders.viewmodel.ProductViewModelFactory;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NewSaleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NewSaleFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FragmentNewSaleBinding binding;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private ProductViewModel productViewModel;
+    private CartViewModel cartViewModel;
+
+    private SaleProductAdapter adapter;
 
     public NewSaleFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NewSaleFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static NewSaleFragment newInstance(String param1, String param2) {
-        NewSaleFragment fragment = new NewSaleFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        super(R.layout.fragment_new_sale);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding = FragmentNewSaleBinding.bind(view);
+
+        initViewModels();
+        setupToolbar();
+        setupRecyclerView();
+        observeProducts();
+        observeCart();
+        setupClickListeners();
+
+        productViewModel.syncProducts();
+    }
+
+    private void initViewModels() {
+
+        ProductRepository productRepository =
+                new ProductRepository(
+                        AppDatabase.getInstance(requireContext()).productDao());
+
+        productViewModel = new ViewModelProvider(
+                this,
+                new ProductViewModelFactory(productRepository)
+        ).get(ProductViewModel.class);
+
+        CartRepository cartRepository =
+                new CartRepository(
+                        AppDatabase.getInstance(requireContext()).cartDao());
+
+        cartViewModel = new ViewModelProvider(
+                this,
+                new CartViewModelFactory(cartRepository)
+        ).get(CartViewModel.class);
+    }
+
+    private void setupToolbar() {
+
+        binding.toolbar.setNavigationOnClickListener(v ->
+                requireActivity().getSupportFragmentManager().popBackStack());
+    }
+
+    private void setupRecyclerView() {
+
+        adapter = new SaleProductAdapter(product -> {
+
+            cartViewModel.addToCart(
+                    CartMapper.fromProduct(product)
+            );
+
+            Toast.makeText(requireContext(),
+                    product.getProductName() + " কার্টে যোগ হয়েছে",
+                    Toast.LENGTH_SHORT).show();
+        });
+
+        binding.rvProducts.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.rvProducts.setHasFixedSize(true);
+        binding.rvProducts.setAdapter(adapter);
+    }
+
+    private void observeProducts() {
+
+        productViewModel.getProducts().observe(getViewLifecycleOwner(),
+                products -> adapter.setProducts(products));
+    }
+
+    private void observeCart() {
+
+        cartViewModel.getCartCount().observe(getViewLifecycleOwner(), count -> {
+
+            if (count == null) count = 0;
+
+            binding.txtCartCount.setText("কার্টে আছে " + count + " টি পণ্য");
+        });
+
+        cartViewModel.getGrandTotal().observe(getViewLifecycleOwner(), total -> {
+
+            if (total == null) total = 0.0;
+
+            binding.txtTotal.setText(
+                    "মোট: ৳ " + String.format("%,.2f", total)
+            );
+        });
+    }
+
+    private void setupClickListeners() {
+
+        binding.btnCart.setOnClickListener(v ->
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, new CartFragment())
+                        .addToBackStack(null)
+                        .commit());
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(
+                getViewLifecycleOwner(),
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        requireActivity().getSupportFragmentManager().popBackStack();
+                    }
+                });
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_sale, container, false);
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

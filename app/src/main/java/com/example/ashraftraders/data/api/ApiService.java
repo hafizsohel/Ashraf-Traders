@@ -5,8 +5,12 @@ import com.example.ashraftraders.data.model.DashboardModel;
 import com.example.ashraftraders.data.model.LoginRequest;
 import com.example.ashraftraders.data.model.ProductModel;
 import com.example.ashraftraders.data.model.UserModel;
+import com.example.ashraftraders.data.model.customer.CustomerModel;
+import com.example.ashraftraders.data.model.customer.CustomerRequest;
+import com.example.ashraftraders.data.model.invoice.InvoiceRequest;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -41,4 +45,22 @@ public interface ApiService {
     );
     @GET("brands?select=*")
     Call<List<BrandModel>> getBrands();
+
+    @Headers("Content-Type: application/json")
+    @POST("rpc/save_invoice")
+    Call<Long> saveInvoice(
+            @Body InvoiceRequest request
+    );
+
+    @Headers("Content-Type: application/json")
+    @POST("rpc/search_customer")
+    Call<List<CustomerModel>> searchCustomer(
+            @Body Map<String, String> body
+    );
+
+    @Headers("Content-Type: application/json")
+    @POST("rpc/save_customer")
+    Call<CustomerModel> saveCustomer(
+            @Body CustomerRequest request
+    );
 }

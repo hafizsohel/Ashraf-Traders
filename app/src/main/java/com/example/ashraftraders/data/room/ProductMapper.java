@@ -1,6 +1,8 @@
 package com.example.ashraftraders.data.room;
 
 import com.example.ashraftraders.data.model.ProductModel;
+import com.example.ashraftraders.data.room.entity.ProductEntity;
+
 import java.util.ArrayList;
 import java.util.List;
 

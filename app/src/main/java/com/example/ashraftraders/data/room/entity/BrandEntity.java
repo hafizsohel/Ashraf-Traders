@@ -1,4 +1,4 @@
-package com.example.ashraftraders.data.room;
+package com.example.ashraftraders.data.room.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

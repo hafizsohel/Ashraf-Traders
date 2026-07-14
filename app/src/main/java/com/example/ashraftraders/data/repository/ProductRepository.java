@@ -7,9 +7,7 @@ import androidx.lifecycle.Transformations;
 import com.example.ashraftraders.data.api.ApiClient;
 import com.example.ashraftraders.data.api.ApiService;
 import com.example.ashraftraders.data.model.ProductModel;
-import com.example.ashraftraders.data.room.AppDatabase;
 import com.example.ashraftraders.data.room.ProductDao;
-import com.example.ashraftraders.data.room.ProductEntity;
 import com.example.ashraftraders.data.room.ProductMapper;
 
 import java.util.List;

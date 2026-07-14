@@ -327,7 +327,9 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <include layout="@layout/item_quick_action" />
+            <include
+                android:id="@+id/quickActionsLayout"
+                layout="@layout/item_quick_action" />
 
             <LinearLayout
                 android:layout_width="match_parent"
