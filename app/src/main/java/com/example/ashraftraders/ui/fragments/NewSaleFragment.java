@@ -1,6 +1,7 @@
 package com.example.ashraftraders.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,11 +18,15 @@ import com.example.ashraftraders.data.model.CartMapper;
 import com.example.ashraftraders.data.repository.CartRepository;
 import com.example.ashraftraders.data.repository.ProductRepository;
 import com.example.ashraftraders.data.room.AppDatabase;
+import com.example.ashraftraders.data.room.entity.CartEntity;
 import com.example.ashraftraders.databinding.FragmentNewSaleBinding;
 import com.example.ashraftraders.viewmodel.CartViewModel;
 import com.example.ashraftraders.viewmodel.CartViewModelFactory;
 import com.example.ashraftraders.viewmodel.ProductViewModel;
 import com.example.ashraftraders.viewmodel.ProductViewModelFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewSaleFragment extends Fragment {
 
@@ -31,6 +36,7 @@ public class NewSaleFragment extends Fragment {
     private CartViewModel cartViewModel;
 
     private SaleProductAdapter adapter;
+    private List<CartEntity> cartItems = new ArrayList<>();
 
     public NewSaleFragment() {
         super(R.layout.fragment_new_sale);
@@ -81,7 +87,7 @@ public class NewSaleFragment extends Fragment {
 
     private void setupRecyclerView() {
 
-        adapter = new SaleProductAdapter(product -> {
+     /*   adapter = new SaleProductAdapter(product -> {
 
             cartViewModel.addToCart(
                     CartMapper.fromProduct(product)
@@ -90,6 +96,26 @@ public class NewSaleFragment extends Fragment {
             Toast.makeText(requireContext(),
                     product.getProductName() + " কার্টে যোগ হয়েছে",
                     Toast.LENGTH_SHORT).show();
+        });*/
+
+        adapter = new SaleProductAdapter(product -> {
+
+            if (product.getStock() == null || product.getStock() <= 0) {
+
+                Toast.makeText(requireContext(),
+                        "স্টকে পণ্য নেই",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            CartEntity cart = CartMapper.fromProduct(product);
+
+            cartViewModel.addToCart(cart);
+
+            Toast.makeText(requireContext(),
+                    product.getProductName() + " কার্টে যোগ হয়েছে",
+                    Toast.LENGTH_SHORT).show();
+
         });
 
         binding.rvProducts.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -103,43 +129,68 @@ public class NewSaleFragment extends Fragment {
                 products -> adapter.setProducts(products));
     }
 
-    private void observeCart() {
+   private void observeCart() {
 
-        cartViewModel.getCartCount().observe(getViewLifecycleOwner(), count -> {
+       cartViewModel.getCartItems().observe(getViewLifecycleOwner(), items -> {
 
-            if (count == null) count = 0;
+           cartItems.clear();
 
-            binding.txtCartCount.setText("কার্টে আছে " + count + " টি পণ্য");
-        });
+           if (items != null) {
+               cartItems.addAll(items);
+           }
 
-        cartViewModel.getGrandTotal().observe(getViewLifecycleOwner(), total -> {
+           Log.d("CART_DEBUG", "Cart Items = " + cartItems.size());
+       });
 
-            if (total == null) total = 0.0;
+       cartViewModel.getCartCount().observe(getViewLifecycleOwner(), count -> {
 
-            binding.txtTotal.setText(
-                    "মোট: ৳ " + String.format("%,.2f", total)
-            );
-        });
-    }
+           if (count == null) count = 0;
+
+           binding.txtCartCount.setText("কার্টে আছে " + count + " টি পণ্য");
+       });
+
+       cartViewModel.getGrandTotal().observe(getViewLifecycleOwner(), total -> {
+
+           if (total == null) total = 0.0;
+
+           binding.txtTotal.setText(
+                   "মোট: ৳ " + String.format("%,.2f", total)
+           );
+       });
+   }
 
     private void setupClickListeners() {
 
-        binding.btnCart.setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new CartFragment())
-                        .addToBackStack(null)
-                        .commit());
+        binding.btnCart.setOnClickListener(v -> {
+
+            if (cartItems.isEmpty()) {
+
+                Toast.makeText(requireContext(),
+                        "কার্টে কোনো পণ্য নেই",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, new CartFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         requireActivity().getOnBackPressedDispatcher().addCallback(
                 getViewLifecycleOwner(),
                 new OnBackPressedCallback(true) {
                     @Override
                     public void handleOnBackPressed() {
-                        requireActivity().getSupportFragmentManager().popBackStack();
+                        requireActivity()
+                                .getSupportFragmentManager()
+                                .popBackStack();
                     }
                 });
     }
+
+
 
     @Override
     public void onDestroyView() {

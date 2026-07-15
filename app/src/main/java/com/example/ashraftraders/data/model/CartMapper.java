@@ -11,11 +11,8 @@ public class CartMapper {
         cart.setProductCode(product.getProduct_code());
         cart.setProductName(product.getProductName());
         cart.setBrandName(product.getBrandName());
-
-        cart.setPrice(product.getPurchasePrice());
-
+        cart.setPrice(product.getSalePrice());
         cart.setQuantity(1);
-
         cart.setStock(product.getStock());
 
         return cart;

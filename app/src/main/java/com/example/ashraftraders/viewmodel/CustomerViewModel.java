@@ -61,7 +61,7 @@ public class CustomerViewModel extends ViewModel {
 
             @Override
             public void onSuccess(CustomerModel model) {
-                customer.postValue(model);
+                savedCustomer.postValue(model);
             }
 
             @Override
@@ -69,5 +69,8 @@ public class CustomerViewModel extends ViewModel {
                 error.postValue(message);
             }
         });
+    }
+    public void clearSavedCustomer() {
+        savedCustomer.setValue(null);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.ashraftraders.data.repository;
 
 
+import android.widget.Toast;
+
 import androidx.lifecycle.LiveData;
 
 import com.example.ashraftraders.data.room.CartDao;
@@ -31,32 +33,54 @@ public class CartRepository {
         return cartDao.getGrandTotal();
     }
 
-    public void addToCart(CartEntity item) {
+ public void addToCart(CartEntity item) {
 
-        executor.execute(() -> {
+     executor.execute(() -> {
 
-            CartEntity exist = cartDao.getCartItem(item.getId());
+         CartEntity exist = cartDao.getCartItem(item.getId());
 
-            if (exist == null) {
+         // নতুন Product
+         if (exist == null) {
 
-                cartDao.insert(item);
+             if (item.getStock() <= 0) {
+                 return;
+             }
 
-            } else {
+             item.setQuantity(1);
+             cartDao.insert(item);
 
-                cartDao.updateQuantity(
-                        item.getId(),
-                        exist.getQuantity() + 1
-                );
-            }
-        });
-    }
+         } else {
+
+             // Stock শেষ
+             if (exist.getQuantity() >= exist.getStock()) {
+                 return;
+             }
+
+             cartDao.updateQuantity(
+                     exist.getId(),
+                     exist.getQuantity() + 1
+             );
+         }
+     });
+ }
 
     public void increaseQuantity(CartEntity item) {
 
-        executor.execute(() ->
-                cartDao.updateQuantity(
-                        item.getId(),
-                        item.getQuantity() + 1));
+        executor.execute(() -> {
+
+            CartEntity cart = cartDao.getCartItem(item.getId());
+
+            if (cart == null) return;
+
+            if (cart.getQuantity() >= cart.getStock()) {
+                return;
+            }
+
+            cartDao.updateQuantity(
+                    cart.getId(),
+                    cart.getQuantity() + 1
+            );
+        });
     }
 
     public void decreaseQuantity(CartEntity item) {

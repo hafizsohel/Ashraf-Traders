@@ -25,6 +25,9 @@ public class ProductModel {
     @SerializedName("purchase_price")
     private Double purchasePrice;
 
+    @SerializedName("sale_price")
+    private Double salePrice;
+
     // int এর বদলে Integer করা হলো যেন ডিফল্ট 0 না হয়ে null থাকে
     @SerializedName("stock")
     private Integer stock;
@@ -87,6 +90,14 @@ public class ProductModel {
         this.stock = stock;
     }
 
+    public Double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(Double salePrice) {
+        this.salePrice = salePrice;
+    }
+
     @Override
     public String toString() {
         return "ProductModel{" +
@@ -96,6 +107,7 @@ public class ProductModel {
                 ", brandId=" + brandId +
                 ", brandName='" + brandName + '\'' +
                 ", purchasePrice=" + purchasePrice +
+                ", salePrice=" + salePrice +
                 ", stock=" + stock +
                 '}';
     }

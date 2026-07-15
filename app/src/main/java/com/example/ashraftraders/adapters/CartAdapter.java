@@ -2,6 +2,7 @@ package com.example.ashraftraders.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,8 +71,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 "৳ " + String.format("%,.2f", subTotal)
         );
 
-        holder.binding.btnPlus.setOnClickListener(v ->
-                listener.onIncrease(item));
+       /* holder.binding.btnPlus.setOnClickListener(v -> {
+
+            if (item.getQuantity() >= item.getStock()) {
+
+                Toast.makeText(
+                        holder.itemView.getContext(),
+                        "স্টকে আর পণ্য নেই",
+                        Toast.LENGTH_SHORT
+                ).show();
+
+                return;
+            }
+
+            listener.onIncrease(item);
+
+        });*/
+        holder.binding.btnPlus.setOnClickListener(v -> {
+            listener.onIncrease(item);
+        });
 
         holder.binding.btnMinus.setOnClickListener(v ->
                 listener.onDecrease(item));

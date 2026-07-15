@@ -18,6 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:padding="10dp">
 
             <!-- Product Image -->
@@ -77,7 +78,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_add"
-                app:backgroundTint="#00695C"
+                app:backgroundTint="@color/charcoal_l2"
                 app:tint="@android:color/white"
                 app:fabCustomSize="40dp"
                 app:maxImageSize="22dp"

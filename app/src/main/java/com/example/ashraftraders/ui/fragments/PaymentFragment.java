@@ -1,6 +1,7 @@
 package com.example.ashraftraders.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -82,10 +83,12 @@ public class PaymentFragment extends Fragment {
 
     private void setupToolbar() {
 
-        binding.btnBack.setOnClickListener(v ->
-                requireActivity()
-                        .getSupportFragmentManager()
-                        .popBackStack());
+        binding.toolbar.setNavigationOnClickListener(v -> {
+
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .popBackStack();
+        });
     }
 
 
@@ -134,13 +137,34 @@ public class PaymentFragment extends Fragment {
                             }
                         });
     }
+
     private void setupPaymentMethod() {
+
+        // Initial State
+        if (binding.rbCash.isChecked()) {
+
+            binding.edtPaidAmount.setEnabled(false);
+            binding.edtPaidAmount.setFocusable(false);
+            binding.edtPaidAmount.setFocusableInTouchMode(false);
+
+            binding.edtPaidAmount.setText(
+                    String.format("%.2f", grandTotal)
+            );
+
+        } else {
+
+            binding.edtPaidAmount.setEnabled(true);
+            binding.edtPaidAmount.setFocusable(true);
+            binding.edtPaidAmount.setFocusableInTouchMode(true);
+        }
 
         binding.rgPaymentMethod.setOnCheckedChangeListener((group, checkedId) -> {
 
             if (checkedId == R.id.rbCash) {
 
                 binding.edtPaidAmount.setEnabled(false);
+                binding.edtPaidAmount.setFocusable(false);
+                binding.edtPaidAmount.setFocusableInTouchMode(false);
 
                 binding.edtPaidAmount.setText(
                         String.format("%.2f", grandTotal)
@@ -149,13 +173,13 @@ public class PaymentFragment extends Fragment {
             } else {
 
                 binding.edtPaidAmount.setEnabled(true);
-
+                binding.edtPaidAmount.setFocusable(true);
+                binding.edtPaidAmount.setFocusableInTouchMode(true);
                 binding.edtPaidAmount.requestFocus();
             }
 
             calculateDue();
         });
-
     }
 
     private void setupPaidAmountListener() {
@@ -218,6 +242,9 @@ public class PaymentFragment extends Fragment {
         );
 
         binding.tvSummaryTotal.setText(
+                "৳ " + String.format("%,.2f", grandTotal)
+        );
+        binding.tvTotal.setText(
                 "৳ " + String.format("%,.2f", grandTotal)
         );
 
@@ -341,12 +368,13 @@ public class PaymentFragment extends Fragment {
         invoiceViewModel.getLoading().observe(getViewLifecycleOwner(), this::showLoading);
 
         invoiceViewModel.getSuccess().observe(getViewLifecycleOwner(), success -> {
-
+            Log.d("SALE_FLOW", "Success = " + success);
             if (!Boolean.TRUE.equals(success))
                 return;
+            Log.d("SALE_FLOW", "OPEN DASHBOARD");
 
+            showLoading(false);
             cartViewModel.clearCart();
-
             Toast.makeText(requireContext(),
                     "বিক্রয় সফল হয়েছে",
                     Toast.LENGTH_SHORT).show();
@@ -364,11 +392,6 @@ public class PaymentFragment extends Fragment {
                     Toast.LENGTH_SHORT).show();
 
             cartViewModel.clearCart();
-
-            requireActivity()
-                    .getSupportFragmentManager()
-                    .popBackStack(null,
-                            FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         });
 
@@ -390,9 +413,7 @@ public class PaymentFragment extends Fragment {
         binding.btnCompleteSale.setEnabled(!loading);
 
         if (loading) {
-
             binding.btnCompleteSale.setText("Saving...");
-
         } else {
 
             binding.btnCompleteSale.setText("বিক্রয় সম্পন্ন করুন");
@@ -402,9 +423,9 @@ public class PaymentFragment extends Fragment {
 
         requireActivity()
                 .getSupportFragmentManager()
-                .popBackStack(null,
-                        androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, new DashboardFragment())
+                .commit();
     }
 
 

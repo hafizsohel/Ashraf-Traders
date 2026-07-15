@@ -40,7 +40,7 @@ public class CustomerRepository {
                                SearchListener listener) {
 
         Map<String, String> body = new HashMap<>();
-        body.put("phone", phone);
+        body.put("phone_input", phone);
 
         apiService.searchCustomer(body).enqueue(new Callback<List<CustomerModel>>() {
 
@@ -51,6 +51,11 @@ public class CustomerRepository {
                 if (response.isSuccessful()
                         && response.body() != null
                         && !response.body().isEmpty()) {
+                    Log.d("CUSTOMER_SEARCH", "HTTP = " + response.code());
+
+                    if (response.body() != null) {
+                        Log.d("CUSTOMER_SEARCH", "Size = " + response.body().size());
+                    }
 
                     listener.onSuccess(response.body().get(0));
 
@@ -114,9 +119,6 @@ public class CustomerRepository {
            @Override
            public void onResponse(@NonNull Call<CustomerModel> call,
                                   @NonNull Response<CustomerModel> response) {
-
-               Log.d("CUSTOMER_SAVE", "HTTP Code = " + response.code());
-               Log.d("CUSTOMER_SAVE", "URL = " + call.request().url());
 
                if (response.isSuccessful() && response.body() != null) {
 

@@ -5,6 +5,7 @@ import static android.opengl.ETC1.isValid;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -96,26 +97,38 @@ public class CustomerInfoFragment extends Fragment {
                                       int before,
                                       int count) {
 
-                if (s.length() == 11) {
-
-                    showLoading();
-
-                    viewModel.searchCustomer(
-                            s.toString()
-                    );
-
-                } else {
-
-                    clearForm();
-                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
+                String phone = s.toString().trim();
+
+                // ১১ ডিজিট হলে Search
+                if (phone.length() == 11) {
+
+                    showLoading();
+
+                    viewModel.searchCustomer(phone);
+
+                } else {
+
+                    // আগের Customer Clear
+                    selectedCustomer = null;
+
+                    binding.edtName.setText("");
+                    binding.edtFatherName.setText("");
+                    binding.edtGranterName.setText("");
+                    binding.edtGranterPhone.setText("");
+                    binding.edtAddress.setText("");
+                    binding.edtNote.setText("");
+
+                    hideLoading();
+                }
             }
         });
     }
+
 
     private void observeCustomer() {
 
@@ -140,25 +153,21 @@ public class CustomerInfoFragment extends Fragment {
 
             fillCustomer(customer);
 
-            Toast.makeText(requireContext(),
-                    "Customer Found",
-                    Toast.LENGTH_SHORT).show();
-
         });
 
         viewModel.getSavedCustomer().observe(getViewLifecycleOwner(), customer -> {
 
-            hideLoading();
-
-            if (customer == null)
+            if (customer == null) {
+                hideLoading();
                 return;
+            }
 
             selectedCustomer = customer;
 
             openPayment(customer.getId());
-
+            viewModel.clearSavedCustomer();
+            hideLoading();
         });
-
         viewModel.getError().observe(getViewLifecycleOwner(), error -> {
 
             hideLoading();
@@ -190,24 +199,20 @@ public class CustomerInfoFragment extends Fragment {
 
         binding.btnNextToPayment.setOnClickListener(v -> {
 
-            if (!isValid())
-                return;
-
-            showLoading();
-
-            if (selectedCustomer != null) {
-
-                hideLoading();
-
-                openPayment(selectedCustomer.getId());
-
+            if (!isValid()) {
                 return;
             }
 
+            // Existing Customer
+            if (selectedCustomer != null) {
+                openPayment(selectedCustomer.getId());
+                return;
+            }
+
+            // New Customer
+            showLoading();
             viewModel.saveCustomer(buildRequest());
-
         });
-
     }
     private boolean isValid() {
 
@@ -283,7 +288,7 @@ public class CustomerInfoFragment extends Fragment {
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
-                .addToBackStack(null)
+                .addToBackStack("CustomerInfo")
                 .commit();
     }
 

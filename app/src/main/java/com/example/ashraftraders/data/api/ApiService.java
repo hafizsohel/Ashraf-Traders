@@ -4,6 +4,7 @@ import com.example.ashraftraders.data.model.BrandModel;
 import com.example.ashraftraders.data.model.DashboardModel;
 import com.example.ashraftraders.data.model.LoginRequest;
 import com.example.ashraftraders.data.model.ProductModel;
+import com.example.ashraftraders.data.model.SalesSummaryModel;
 import com.example.ashraftraders.data.model.UserModel;
 import com.example.ashraftraders.data.model.customer.CustomerModel;
 import com.example.ashraftraders.data.model.customer.CustomerRequest;
@@ -63,4 +64,7 @@ public interface ApiService {
     Call<CustomerModel> saveCustomer(
             @Body CustomerRequest request
     );
+    @Headers("Content-Type: application/json")
+    @POST("rpc/dashboard_sales_summary")
+    Call<List<SalesSummaryModel>> getSalesSummary();
 }

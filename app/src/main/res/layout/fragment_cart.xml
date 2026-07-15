@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#F7F8FA">
+        android:background="@drawable/liquid_gradient_bg">
 
 
         <!-- Toolbar -->
@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#004D40"
+            android:background="@color/charcoal_l1"
             app:navigationIcon="@drawable/ic_back"
             app:title="আমার কার্ট"
             app:titleCentered="true"
@@ -69,6 +69,26 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="মোট পরিমাণ"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvTotalQty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="৮ টি"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -103,7 +123,7 @@
                     android:textAllCaps="false"
                     android:textSize="16sp"
                     app:cornerRadius="14dp"
-                    android:backgroundTint="#004D40" />
+                    android:backgroundTint="@color/charcoal_l1" />
 
             </LinearLayout>
 

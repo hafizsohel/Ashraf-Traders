@@ -1,5 +1,6 @@
 package com.example.ashraftraders.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -62,9 +63,10 @@ public class SaleProductAdapter extends RecyclerView.Adapter<SaleProductAdapter.
         holder.binding.txtStock.setText("স্টক: " + product.getStock());
 
         holder.binding.txtPrice.setText(
-                "৳ " + String.format("%,.0f", product.getPurchasePrice())
+                "৳ " + String.format("%,.0f", product.getSalePrice())
         );
 
+        Log.d("Price", "onBindViewHolder: "+productList);
         // যদি Image URL থাকে
         /*
         Glide.with(holder.itemView.getContext())

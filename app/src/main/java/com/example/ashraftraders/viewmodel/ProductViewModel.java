@@ -314,11 +314,11 @@ public class ProductViewModel extends ViewModel {
                 break;
 
             case "Price Low-High":
-                filtered.sort((a, b) -> Double.compare(a.getPurchasePrice(), b.getPurchasePrice()));
+                filtered.sort((a, b) -> Double.compare(a.getPurchasePrice(), b.getSalePrice()));
                 break;
 
             case "Price High-Low":
-                filtered.sort((a, b) -> Double.compare(b.getPurchasePrice(), a.getPurchasePrice()));
+                filtered.sort((a, b) -> Double.compare(b.getPurchasePrice(), a.getSalePrice()));
                 break;
         }
 

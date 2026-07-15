@@ -45,15 +45,21 @@ public class InvoiceViewModel extends ViewModel {
             @Override
             public void onSuccess(Long id) {
 
+                loading.postValue(false);
+
                 invoiceId.postValue(id);
 
+                success.postValue(true);
             }
 
             @Override
             public void onError(String message) {
 
+                loading.postValue(false);
+
                 error.postValue(message);
 
+                success.postValue(false);
             }
         });
     }

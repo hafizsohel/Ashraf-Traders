@@ -2,6 +2,7 @@ package com.example.ashraftraders.ui.fragments;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -65,6 +66,15 @@ public class CartFragment extends Fragment {
 
             @Override
             public void onIncrease(CartEntity item) {
+
+                if (item.getQuantity() >= item.getStock()) {
+
+                    Toast.makeText(requireContext(),
+                            "স্টকে আর পণ্য নেই",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 viewModel.increase(item);
             }
 
@@ -86,14 +96,26 @@ public class CartFragment extends Fragment {
 
     private void observeCart() {
 
-        viewModel.getCartItems().observe(getViewLifecycleOwner(),
-                adapter::setCartItems);
+        viewModel.getCartItems().observe(getViewLifecycleOwner(), items -> {
 
-        viewModel.getCartCount().observe(getViewLifecycleOwner(), count -> {
+            adapter.setCartItems(items);
 
-            if (count == null) count = 0;
+            int totalQty = 0;
 
-            binding.tvItemCount.setText(count + " টি পণ্য");
+            if (items != null) {
+
+                for (CartEntity item : items) {
+                    totalQty += item.getQuantity();
+                }
+
+                binding.tvItemCount.setText(items.size() + " টি পণ্য");
+
+            } else {
+
+                binding.tvItemCount.setText("০ টি পণ্য");
+            }
+
+            binding.tvTotalQty.setText(totalQty + " টি");
         });
 
         viewModel.getGrandTotal().observe(getViewLifecycleOwner(), total -> {
@@ -101,7 +123,8 @@ public class CartFragment extends Fragment {
             if (total == null) total = 0.0;
 
             binding.tvGrandTotal.setText(
-                    "৳ " + String.format("%,.2f", total));
+                    "৳ " + String.format("%,.2f", total)
+            );
         });
     }
 

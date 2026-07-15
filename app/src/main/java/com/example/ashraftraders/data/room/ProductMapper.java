@@ -23,6 +23,7 @@ public class ProductMapper {
                 model.getBrandName(),
 
                 model.getPurchasePrice(),
+                model.getSalePrice(),
 
                 model.getStock()
 
@@ -57,6 +58,7 @@ public class ProductMapper {
         model.setBrandName(entity.getBrandName());
 
         model.setPurchasePrice(entity.getPurchasePrice());
+        model.setSalePrice(entity.getSalePrice());
 
         model.setStock(entity.getStock());
 

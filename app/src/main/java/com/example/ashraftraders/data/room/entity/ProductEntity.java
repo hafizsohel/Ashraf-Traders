@@ -13,14 +13,16 @@ public class ProductEntity {
     private String productName;
     private String brandName;
     private double purchasePrice;
+    private double salePrice;
     private int stock;
 
-    public ProductEntity(long id, String productCode, String productName, String brandName, double purchasePrice, int stock) {
+    public ProductEntity(long id, String productCode, String productName, String brandName, double purchasePrice,double salePrice,int stock) {
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
         this.brandName = brandName;
         this.purchasePrice = purchasePrice;
+        this.salePrice = salePrice;
         this.stock = stock;
     }
 
@@ -31,4 +33,8 @@ public class ProductEntity {
     public String getBrandName() { return brandName; }
     public double getPurchasePrice() { return purchasePrice; }
     public int getStock() { return stock; }
+
+    public double getSalePrice() {
+        return salePrice;
+    }
 }

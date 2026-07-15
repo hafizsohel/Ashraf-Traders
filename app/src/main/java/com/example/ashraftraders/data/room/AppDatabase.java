@@ -10,7 +10,7 @@ import com.example.ashraftraders.data.room.entity.BrandEntity;
 import com.example.ashraftraders.data.room.entity.CartEntity;
 import com.example.ashraftraders.data.room.entity.ProductEntity;
 
-@Database(entities = {ProductEntity.class, BrandEntity.class, CartEntity.class}, version = 3, exportSchema = false)
+@Database(entities = {ProductEntity.class, BrandEntity.class, CartEntity.class}, version = 4, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase INSTANCE;
