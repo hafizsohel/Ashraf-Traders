@@ -4,12 +4,17 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.ashraftraders.data.model.SaleModel;
 import com.example.ashraftraders.data.model.SalesSummaryModel;
 import com.example.ashraftraders.data.repository.SalesRepository;
+
+import java.util.List;
 
 public class SalesViewModel extends ViewModel {
 
     private final SalesRepository repository;
+    private final MutableLiveData<List<SaleModel>> recentSales =
+            new MutableLiveData<>();
 
     private final MutableLiveData<SalesSummaryModel> summary =
             new MutableLiveData<>();
@@ -27,6 +32,13 @@ public class SalesViewModel extends ViewModel {
 
     public LiveData<String> getError() {
         return error;
+    }
+    public LiveData<List<SaleModel>> getRecentSales() {
+        return recentSales;
+    }
+    public void loadRecentSales() {
+        repository.getRecentSales(recentSales);
+
     }
 
     public void loadSummary() {

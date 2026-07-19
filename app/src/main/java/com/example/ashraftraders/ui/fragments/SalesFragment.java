@@ -2,6 +2,7 @@ package com.example.ashraftraders.ui.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +12,31 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.ashraftraders.R;
+import com.example.ashraftraders.adapters.SalesAdapter;
+import com.example.ashraftraders.data.model.SaleModel;
 import com.example.ashraftraders.data.model.SalesSummaryModel;
 import com.example.ashraftraders.data.repository.SalesRepository;
 import com.example.ashraftraders.databinding.FragmentSalesBinding;
 import com.example.ashraftraders.ui.activities.MainActivity;
+import com.example.ashraftraders.viewmodel.DashboardViewModel;
 import com.example.ashraftraders.viewmodel.SalesViewModel;
 import com.example.ashraftraders.viewmodel.SalesViewModelFactory;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class SalesFragment extends Fragment {
 
     private FragmentSalesBinding binding;
     private SalesViewModel viewModel;
+    private DashboardViewModel dViewModel;
+    private SalesAdapter adapter;
 
     public SalesFragment() {
         // Required empty public constructor
@@ -42,8 +51,11 @@ public class SalesFragment extends Fragment {
         requireActivity().getWindow().setStatusBarColor(Color.parseColor("#0B6A5D"));
 
 
+        initRecycler();
         initViewModel();
         observeSummary();
+        loadData();
+        clickEvents();
 
         binding.quickActionsLayout.btnNewSale.setOnClickListener(v -> {
             requireActivity().getSupportFragmentManager()
@@ -67,6 +79,13 @@ public class SalesFragment extends Fragment {
 
         showTodayDate();
     }
+    private void initRecycler() {
+
+        adapter = new SalesAdapter();
+        binding.rvSales.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.rvSales.setHasFixedSize(true);
+        binding.rvSales.setAdapter(adapter);
+    }
 
     private void showTodayDate() {
 
@@ -84,8 +103,6 @@ public class SalesFragment extends Fragment {
                 this,
                 new SalesViewModelFactory(repository)
         ).get(SalesViewModel.class);
-
-        viewModel.loadSummary();
     }
     private void observeSummary() {
 
@@ -116,6 +133,55 @@ public class SalesFragment extends Fragment {
                 Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        viewModel.getRecentSales().observe(getViewLifecycleOwner(), list -> {
+
+                if (list == null) return;
+
+                List<SaleModel> todaySales = new ArrayList<>();
+
+                String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        .format(new Date());
+
+                for (SaleModel sale : list) {
+
+                    if (sale.getInvoiceDate() != null &&
+                            sale.getInvoiceDate().startsWith(today)) {
+
+                        todaySales.add(sale);
+                    }
+                }
+
+                adapter.submitList(todaySales);
+            });
+    }
+    private void loadData() {
+        viewModel.loadSummary();
+        viewModel.loadRecentSales();
+
+    }
+
+    private void clickEvents() {
+
+        adapter.setOnItemClickListener(model -> {
+
+            Bundle bundle = new Bundle();
+
+            bundle.putLong("invoice_id", model.getInvoiceId());
+
+           // SaleDetailsFragment fragment = new SaleDetailsFragment();
+            //fragment.setArguments(bundle);
+
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                  //  .replace(R.id.fragmentContainer, fragment)
+                    .addToBackStack(null)
+                    .commit();
+
+        });
+
     }
 
     @Override

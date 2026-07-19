@@ -3,9 +3,11 @@ package com.example.ashraftraders.data.repository;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.ashraftraders.data.api.ApiClient;
 import com.example.ashraftraders.data.api.ApiService;
+import com.example.ashraftraders.data.model.SaleModel;
 import com.example.ashraftraders.data.model.SalesSummaryModel;
 
 import java.util.List;
@@ -81,5 +83,39 @@ public class SalesRepository {
                 listener.onError(t.getMessage());
             }
         });
+
+
+    }
+
+    public void getRecentSales(MutableLiveData<List<SaleModel>> liveData) {
+
+        apiService.getRecentSales().enqueue(new Callback<List<SaleModel>>() {
+
+            @Override
+            public void onResponse(@NonNull Call<List<SaleModel>> call,
+                                   @NonNull Response<List<SaleModel>> response) {
+
+                if (response.body() != null) {
+
+                    for (SaleModel model : response.body()) {
+                        Log.d("RECENT", model.toString());
+                    }
+
+                    liveData.postValue(response.body());
+                } else {
+                    Log.d("RECENT", "Body = null");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<SaleModel>> call,
+                                  @NonNull Throwable t) {
+
+                Log.e("RECENT_SALES", "API Error", t);
+
+                liveData.postValue(null);
+            }
+        });
+
     }
 }

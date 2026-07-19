@@ -79,43 +79,6 @@ public class CustomerRepository {
 
         apiService.saveCustomer(request).enqueue(new Callback<CustomerModel>() {
 
-           /* @Override
-            public void onResponse(@NonNull Call<CustomerModel> call,
-                                   @NonNull Response<CustomerModel> response) {
-
-                if (response.isSuccessful() && response.body() != null) {
-
-                    listener.onSuccess(response.body());
-
-                } else {
-
-                  //  listener.onError("Customer Save Failed");
-
-                    if (response.isSuccessful() && response.body() != null) {
-                        Log.d("CUSTOMER_SAVE", "Success : " + response.body().getCustomerName());
-                        listener.onSuccess(response.body());
-
-                    } else {
-                        try {
-                            listener.onError(
-                                    "Code : " + response.code() +
-                                            "\nError : " + response.errorBody().string()
-                            );
-                            Log.d("CUSTOMER_SAVE", "Error : " + response.errorBody().string());
-
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<CustomerModel> call,
-                                  @NonNull Throwable t) {
-
-                listener.onError(t.getMessage());
-            }*/
            @Override
            public void onResponse(@NonNull Call<CustomerModel> call,
                                   @NonNull Response<CustomerModel> response) {
