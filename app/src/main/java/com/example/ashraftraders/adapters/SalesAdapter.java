@@ -16,6 +16,7 @@ import java.util.List;
 
 public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.ViewHolder> {
     private final List<SaleModel> list = new ArrayList<>();
+    private final List<SaleModel> fullList = new ArrayList<>();
 
     private OnItemClickListener listener;
 
@@ -30,9 +31,12 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.ViewHolder> 
     public void submitList(List<SaleModel> newList) {
 
         list.clear();
+        fullList.clear();
 
-        if (newList != null)
+        if (newList != null) {
             list.addAll(newList);
+            fullList.addAll(newList);
+        }
 
         notifyDataSetChanged();
     }
@@ -83,7 +87,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.ViewHolder> 
             b.txtProduct.setText(model.getProductSummary());
 
             b.txtCustomer.setText("Name: "+model.getCustomerName());
-
+            b.tvPhone.setText("Phone : "+model.getPhone());
             b.txtQty.setText("Qty : " + df.format(model.getQty()));
 
             b.txtTotal.setText("৳ " + df.format(model.getTotal()));
@@ -123,5 +127,36 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.ViewHolder> 
                 }
             });
         }
+
+    }
+
+    public void filter(String keyword) {
+
+        list.clear();
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+
+            list.addAll(fullList);
+
+        } else {
+
+            keyword = keyword.toLowerCase().trim();
+
+            for (SaleModel sale : fullList) {
+
+                String invoice = sale.getInvoiceNo() == null ? "" : sale.getInvoiceNo().toLowerCase();
+                String customer = sale.getCustomerName() == null ? "" : sale.getCustomerName().toLowerCase();
+                String phone = sale.getPhone() == null ? "" : sale.getPhone().toLowerCase();
+
+                if (invoice.contains(keyword)
+                        || customer.contains(keyword)
+                        || phone.contains(keyword)) {
+
+                    list.add(sale);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
     }
 }

@@ -73,7 +73,6 @@ public class ProductListFragment extends Fragment {
                 @Override
                 public void onProductSubmit(ProductModel product) {
                     // [ম্যাজিক ফিক্স] ভিউমডেলের মাধ্যমে সার্ভার ও লোকাল রুমে ডেটা ইনসার্ট করা হচ্ছে
-                   // viewModel.addProductToServerAndRoom(product);
                     viewModel.addProductToServerAndRoom(product);
                     android.widget.Toast.makeText(requireContext(),
                             product.getProductName() + " পণ্য সফলভাবে সাবমিট করা হয়েছে! ",

@@ -57,14 +57,10 @@ public class SalesFragment extends Fragment {
         loadData();
         clickEvents();
 
-        binding.quickActionsLayout.btnNewSale.setOnClickListener(v -> {
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainer, new NewSaleFragment())
-                    .addToBackStack(null)
-                    .commit();
-        });
-
+        binding.quickActionsLayout.btnNewSale.setOnClickListener(v->openFragment(new NewSaleFragment()));
+        binding.quickActionsLayout.btnSaleList.setOnClickListener(v->openFragment(new SalesListFragment()));
+        binding.tvSeeAll.setOnClickListener(v->openFragment(new SalesListFragment()));
+        binding.quickActionsLayout.btnDueCollection.setOnClickListener(v->openFragment(new DueCollectionFragment()));
 
         binding.toolbar.setNavigationOnClickListener(v -> {
             requireActivity().onBackPressed();
@@ -182,6 +178,15 @@ public class SalesFragment extends Fragment {
 
         });
 
+    }
+
+    private void openFragment(Fragment fragment) {
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override

@@ -15,7 +15,6 @@ public class SalesViewModelFactory implements ViewModelProvider.Factory {
 
     @NonNull
     @Override
-    @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
         return (T) new SalesViewModel(repository);

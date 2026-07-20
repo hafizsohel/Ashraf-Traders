@@ -34,6 +34,9 @@ public class SaleModel {
     @SerializedName("invoice_date")
     private String invoiceDate;
 
+    @SerializedName("phone")
+    private String phone;
+
     public long getInvoiceId() {
         return invoiceId;
     }
@@ -74,6 +77,14 @@ public class SaleModel {
         return invoiceDate;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
         return "SaleModel{" +
@@ -82,6 +93,7 @@ public class SaleModel {
                 ", productSummary='" + productSummary + '\'' +
                 ", qty=" + qty +
                 ", customerName='" + customerName + '\'' +
+                ", phone='" + phone + '\'' +
                 ", total=" + total +
                 ", paid=" + paid +
                 ", due=" + due +

@@ -2,6 +2,7 @@ package com.example.ashraftraders.data.api;
 
 import com.example.ashraftraders.data.model.BrandModel;
 import com.example.ashraftraders.data.model.DashboardModel;
+import com.example.ashraftraders.data.model.DueModel;
 import com.example.ashraftraders.data.model.LoginRequest;
 import com.example.ashraftraders.data.model.ProductModel;
 import com.example.ashraftraders.data.model.SaleModel;
@@ -10,6 +11,7 @@ import com.example.ashraftraders.data.model.UserModel;
 import com.example.ashraftraders.data.model.customer.CustomerModel;
 import com.example.ashraftraders.data.model.customer.CustomerRequest;
 import com.example.ashraftraders.data.model.invoice.InvoiceRequest;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 import java.util.Map;
@@ -71,4 +73,11 @@ public interface ApiService {
 
     @POST("rpc/dashboard_recent_sales")
     Call<List<SaleModel>> getRecentSales();
+
+    @POST("rpc/due_invoice_list")
+    Call<List<DueModel>> getDueInvoiceList(@Body JsonObject body);
+
+    @Headers("Content-Type: application/json")
+    @POST("rpc/collect_due_payment")
+    Call<Void> collectDuePayment(@Body JsonObject body);
 }
