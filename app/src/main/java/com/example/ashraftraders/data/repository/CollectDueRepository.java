@@ -37,16 +37,22 @@ public class CollectDueRepository {
         body.addProperty("p_note", note);
         body.addProperty("p_received_by", receivedBy);
 
-        // Logged-in User ID
-       // body.addProperty("p_received_by", sessionManager.getUserId());
+
+        Log.d("CollectDue", "========== REQUEST ==========");
+        Log.d("CollectDue", "Invoice ID : " + invoiceId);
+        Log.d("CollectDue", "Receive Amount : " + receiveAmount);
+        Log.d("CollectDue", "Note : " + note);
+        Log.d("CollectDue", "Received By : " + receivedBy);
+        Log.d("CollectDue", "Body : " + body.toString());
 
         apiService.collectDuePayment(body).enqueue(new Callback<Void>() {
 
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
 
-                Log.d("CollectDue", "Code = " + response.code());
-                Log.d("CollectDue", "Message = " + response.message());
+                Log.d("CollectDue", "========== RESPONSE ==========");
+                Log.d("CollectDue", "HTTP Code : " + response.code());
+                Log.d("CollectDue", "Successful : " + response.isSuccessful());
 
                 if (response.errorBody() != null) {
                     try {
@@ -57,7 +63,7 @@ public class CollectDueRepository {
                 }
 
                 if (response.isSuccessful()) {
-
+                    Log.d("CollectDue", "Payment Success -> Reload list");
                     result.postValue(true);
                     message.postValue("বকেয়া সফলভাবে আদায় হয়েছে");
 

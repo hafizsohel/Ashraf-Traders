@@ -22,7 +22,6 @@ import com.example.ashraftraders.databinding.FragmentProfileBinding;
 import com.example.ashraftraders.session.SessionManager;
 import com.example.ashraftraders.ui.activities.LoginActivity;
 import com.example.ashraftraders.ui.activities.MainActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;

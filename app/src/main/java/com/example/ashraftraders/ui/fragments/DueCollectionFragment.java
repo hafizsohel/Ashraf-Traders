@@ -42,6 +42,7 @@ public class DueCollectionFragment extends Fragment {
         initRecyclerView();
         observeData();
         initSearch();
+        setupToolbar();
 
         viewModel.loadDueList();
 
@@ -67,6 +68,11 @@ public class DueCollectionFragment extends Fragment {
 
         });
 
+    }
+    private void setupToolbar() {
+
+        binding.toolbar.setNavigationOnClickListener(v ->
+                requireActivity().getSupportFragmentManager().popBackStack());
     }
 
     private void initViewModel() {

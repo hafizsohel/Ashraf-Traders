@@ -1,6 +1,8 @@
 package com.example.ashraftraders.data.repository;
 
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import com.example.ashraftraders.data.api.ApiClient;
 import com.example.ashraftraders.data.api.ApiService;
@@ -28,9 +30,22 @@ public class DueRepository {
             @Override
             public void onResponse(Call<List<DueModel>> call,
                                    Response<List<DueModel>> response) {
+                Log.d("DueRefresh", "API Called");
 
                 if (response.isSuccessful() && response.body() != null) {
+                    Log.d("DueRefresh", "Size = " + response.body().size());
                     liveData.setValue(response.body());
+
+                    List<DueModel> list = response.body();
+                    for (DueModel item : list) {
+
+                        Log.d("DueRefresh",
+                                "Invoice ID = " + item.getInvoiceId()
+                                        + " | Invoice No = " + item.getInvoiceNo()
+                                        + " | Due = " + item.getDueAmount());
+
+                    }
+
                 }
             }
 

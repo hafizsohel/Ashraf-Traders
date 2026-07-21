@@ -3,6 +3,7 @@ package com.example.ashraftraders.views;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -228,7 +229,6 @@ public class CollectDueBottomSheet extends BottomSheetDialogFragment {
                 if (listener != null) {
                     listener.onSuccess();
                 }
-
                 dismiss();
 
             }
@@ -245,6 +245,7 @@ public class CollectDueBottomSheet extends BottomSheetDialogFragment {
 
     private void validateAndCollect() {
 
+
         String amountText = binding.etAmount.getText().toString().trim();
         String remarks = binding.etRemarks.getText().toString().trim();
 
@@ -255,6 +256,8 @@ public class CollectDueBottomSheet extends BottomSheetDialogFragment {
             return;
 
         }
+
+
 
         double receiveAmount;
 
@@ -285,6 +288,12 @@ public class CollectDueBottomSheet extends BottomSheetDialogFragment {
             return;
 
         }
+
+        Log.d("CollectDue", "================================");
+        Log.d("CollectDue", "Invoice ID = " + dueModel.getInvoiceId());
+        Log.d("CollectDue", "Due Amount = " + dueModel.getDueAmount());
+        Log.d("CollectDue", "Entered Amount = " + receiveAmount);
+        Log.d("CollectDue", "================================");
 
         viewModel.collectDuePayment(
                 dueModel.getInvoiceId(),
