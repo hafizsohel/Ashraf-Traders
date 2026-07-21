@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="space_2">2dp</dimen>
+    <dimen name="space_4">4dp</dimen>
+    <dimen name="space_8">8dp</dimen>
+    <dimen name="space_12">12dp</dimen>
+    <dimen name="space_16">16dp</dimen>
+    <dimen name="space_20">20dp</dimen>
+    <dimen name="space_24">24dp</dimen>
+    <dimen name="space_30">30dp</dimen>
+    <dimen name="space_40">40dp</dimen>
+
+    <!-- Radius -->
+    <dimen name="radius_small">12dp</dimen>
+    <dimen name="radius_medium">18dp</dimen>
+    <dimen name="radius_large">24dp</dimen>
+    <dimen name="radius_xlarge">30dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="card_elevation">8dp</dimen>
+
+    <dimen name="nav_bar_height">72dp</dimen>
+    <dimen name="nav_bar_corner_radius">36dp</dimen>
+    <dimen name="nav_bar_horizontal_margin">16dp</dimen>
+    <dimen name="nav_icon_size">24dp</dimen>
+    <dimen name="nav_grid_button_size">56dp</dimen>
+
+
+        <dimen name="default_padding">16dp</dimen>
+        <dimen name="small_padding">12dp</dimen>
+        <dimen name="header_text_size">16sp</dimen>
+        <dimen name="sub_text_size">12sp</dimen>
+        <dimen name="section_margin_bottom">24dp</dimen>
+        <dimen name="section_header_spacing">8dp</dimen>
+        <dimen name="card_spacing">16dp</dimen>
+        <dimen name="card_corner_radius">12dp</dimen>
+        <dimen name="card_width">110dp</dimen>
+        <dimen name="card_internal_padding">16dp</dimen>
+        <dimen name="activity_horizontal_margin">16dp</dimen>
+
+</resources>

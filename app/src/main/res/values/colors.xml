@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="splash">#000E27</color>
+
+    <color name="travel_blue">#3A8DFF</color>
+    <color name="charcoal">#004D40</color>
+    <color name="charcoal_l1">#0B6A5D</color>
+    <color name="charcoal_l2">#1E8E7E</color>
+    <color name="red">#F50057</color>
+    <color name="gray">#36454F</color>
+    <color name="yellow">#FFEA00</color>
+    <color name="ghost_white">#F8F8FF</color>
+    <color name="snow">#FBFBFD</color>
+    <color name="white_gray">#8EA3A6</color>
+    <color name="black2">#424769</color>
+    <color name="charcoal_light">#3A8DFF</color>
+    <color name="transparent_white">#80FFFFFF</color>
+    <color name="liquid_color">#80E5E8EB</color>
+
+    <!-- Accent -->
+    <color name="accent">#26A69A</color>
+    <color name="gold">#C8A95A</color>
+
+    <!-- Background -->
+    <color name="background">#F7FAF9</color>
+    <color name="surface">#FFFFFF</color>
+
+    <!-- Glass -->
+    <color name="glass_white">#E6FFFFFF</color>
+    <color name="glass_light">#CCFFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_secondary">#707070</color>
+    <color name="text_hint">#9E9E9E</color>
+
+    <!-- Border -->
+    <color name="border">#D8D8D8</color>
+
+    <!-- Status -->
+    <color name="success">#2E7D32</color>
+    <color name="warning">#F9A825</color>
+    <color name="danger">#D32F2F</color>
+
+    <!-- Dashboard Cards -->
+    <color name="sales_card">#009688</color>
+    <color name="purchase_card">#1976D2</color>
+    <color name="stock_card">#FB8C00</color>
+    <color name="customer_card">#8E24AA</color>
+
+    <!-- Shadow -->
+    <color name="shadow">#22000000</color>
+    <!-- Primary Brand Colors -->
+    <color name="primary_dark">#00332A</color>
+    <color name="primary">#004D40</color>
+    <color name="primary_light">#00695C</color>
+
+    <color name="nav_bg_white">#FFFFFF</color>
+    <color name="nav_dark_teal">#0E3B36</color>
+    <color name="nav_dark_teal_light">#12463F</color>
+    <color name="nav_icon_inactive">#9AA5A3</color>
+    <color name="nav_text_inactive">#9AA5A3</color>
+    <color name="nav_icon_active_on_dark">#FFFFFF</color>
+    <color name="nav_shadow">#22000000</color>
+    <color name="glass_bg">#BABCD4</color>
+
+
+        <color name="dashboard_bg">#F7F7F7</color> <!-- Light grey background -->
+        <color name="date_text_color">#A0A0A0</color> <!-- date/sub header greys -->
+        <color name="sub_header_text">#616161</color>
+        <color name="see_all_text">#4CAF50</color> <!-- green for see all and trends -->
+        <color name="trend_green">#4CAF50</color>
+        <color name="trend_red">#F44336</color> <!-- red for trend -->
+        <color name="due_status_bg">#FFF3F2</color> <!-- red hue for due background in list -->
+        <color name="due_text_red">#F44336</color>
+        <color name="paid_status_bg">#E0F2F1</color> <!-- green hue for paid background in list -->
+        <color name="paid_text_green">#4CAF50</color>
+
+        <!-- আইকনের রঙের সংজ্ঞা, এগুলি ড্রয়েবলে ব্যবহার করবেন -->
+        <color name="green_icon_tint">#4CAF50</color>
+        <color name="blue_icon_tint">#2196F3</color>
+        <color name="orange_icon_tint">#FF9800</color>
+        <color name="purple_icon_tint">#9C27B0</color>
+        <color name="red_icon_tint">#F44336</color>
+        <!-- ড্রয়েবল বা ডিজাইনের জন্য আপনি এই নামগুলো ব্যবহার করতে পারেন -->
+
+    <color name="card_bg_sale">#F4FBF7</color>
+    <color name="card_stroke_sale">#E2F5EC</color>
+    <color name="card_icon_sale">#10A375</color>
+
+    <color name="card_bg_list">#F4F8FF</color>
+    <color name="card_stroke_list">#E2EDFF</color>
+    <color name="card_icon_list">#1A73E8</color>
+
+    <color name="card_bg_due">#FFF9F2</color>
+    <color name="card_stroke_due">#FFEAD2</color>
+    <color name="card_icon_due">#FF8C00</color>
+
+    <color name="card_bg_return">#FFF4F4</color>
+    <color name="card_stroke_return">#FFE2E2</color>
+    <color name="card_icon_return">#F44336</color>
+
+    <color name="text_main">#1A1A1A</color>
+    <color name="text_sub">#666666</color>
+
+</resources>

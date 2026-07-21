@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/liquid_gradient_bg"
+        >
+
+        <FrameLayout
+            android:id="@+id/header"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:background="@drawable/bg_profile_header"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/ic_back"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="24dp" />
+
+        </FrameLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="-110dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clipToPadding="false"
+                android:paddingBottom="32dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/profileCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginBottom="24dp"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="12dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="@android:color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingTop="14dp"
+                        android:background="@color/transparent_white"
+                        android:paddingBottom="24dp">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/imgProfile"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:background="@drawable/ic_people"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_add"
+                                app:shapeAppearanceOverlay="@style/CircleImage" />
+
+                            <ImageView
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_gravity="bottom|end"
+                                android:background="@drawable/ic_menu"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_add"
+                                app:tint="@android:color/white" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvFullName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Hafizur Rahman"
+                            android:textStyle="bold"
+                            android:textSize="22sp"
+                            android:textColor="#1E293B" />
+
+                        <TextView
+                            android:id="@+id/tvRoll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="System Engineer"
+                            android:textSize="14sp"
+                            android:textColor="#64748B" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="@android:color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F1F5F9"
+                            android:layout_marginHorizontal="16dp" />
+
+                        <LinearLayout
+                            android:id="@+id/menu_shop"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="16dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_shop"
+                                app:tint="#0D6E6A" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:text="দোকানের তথ্য"
+                                android:textColor="#1E293B"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="#A0AAB2" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F1F5F9"
+                            android:layout_marginHorizontal="16dp" />
+
+                        <LinearLayout
+                            android:id="@+id/menu_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="16dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_menu"
+                                app:tint="#0D6E6A" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:text="সিস্টেম সেটিংস"
+                                android:textColor="#1E293B"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="#A0AAB2" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F1F5F9"
+                            android:layout_marginHorizontal="16dp" />
+
+                        <LinearLayout
+                            android:id="@+id/menu_backup"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="16dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_menu"
+                                app:tint="#0D6E6A" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:text="ব্যাকআপ ও পুনরুদ্ধার"
+                                android:textColor="#1E293B"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="#A0AAB2" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F1F5F9"
+                            android:layout_marginHorizontal="16dp" />
+
+                        <LinearLayout
+                            android:id="@+id/menu_reports"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="16dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_menu"
+                                app:tint="#0D6E6A" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:text="রিপোর্ট"
+                                android:textColor="#1E293B"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="#A0AAB2" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F1F5F9"
+                            android:layout_marginHorizontal="16dp" />
+
+                        <LinearLayout
+                            android:id="@+id/menu_logout"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="16dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_logout"
+                                app:tint="#D32F2F" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:text="লগআউট"
+                                android:textColor="#D32F2F"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="#D32F2F" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

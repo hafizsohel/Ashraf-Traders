@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="12dp">
+
+            <!-- Product Image -->
+            <ImageView
+                android:id="@+id/imgProduct"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_box"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <!-- Product Name -->
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="8dp"
+                android:text="RFL পাইপ ১ ইঞ্চি"
+                android:textColor="#212121"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/imgProduct"
+                app:layout_constraintTop_toTopOf="@id/imgProduct"
+                app:layout_constraintEnd_toStartOf="@id/btnDelete" />
+
+            <!-- Delete -->
+            <ImageView
+                android:id="@+id/btnDelete"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_delete"
+                android:tint="#FF3B30"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <!-- Unit Price -->
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="৳ 120.00"
+                android:textColor="#424242"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@id/txtName"
+                app:layout_constraintTop_toBottomOf="@id/txtName" />
+
+            <!-- Quantity Box -->
+            <LinearLayout
+                android:id="@+id/layoutQty"
+                android:layout_width="120dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/txtName"
+                app:layout_constraintTop_toBottomOf="@id/txtPrice">
+
+                <ImageButton
+                    android:id="@+id/btnMinus"
+                    android:layout_width="36dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_remove"
+                    android:tint="#444"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/txtQty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textColor="#212121"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/btnPlus"
+                    android:layout_width="36dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_add"
+                    android:tint="#444"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <!-- Total Price -->
+            <TextView
+                android:id="@+id/txtTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="৳ 240.00"
+                android:textColor="#212121"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/layoutQty"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

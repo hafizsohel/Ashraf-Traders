@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- হালকা সবুজ ব্যাকগ্রাউন্ড কালার -->
+    <solid android:color="#E8F5E9"/>
+
+    <!-- কোণাগুলো সামান্য গোল করার জন্য (image_0fc779.jpg অনুযায়ী) -->
+    <corners android:radius="6dp"/>
+</shape>
