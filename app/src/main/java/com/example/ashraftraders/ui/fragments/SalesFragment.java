@@ -35,11 +35,9 @@ public class SalesFragment extends Fragment {
 
     private FragmentSalesBinding binding;
     private SalesViewModel viewModel;
-    private DashboardViewModel dViewModel;
     private SalesAdapter adapter;
 
     public SalesFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -57,14 +55,16 @@ public class SalesFragment extends Fragment {
         loadData();
         clickEvents();
 
-        binding.quickActionsLayout.btnNewSale.setOnClickListener(v->openFragment(new NewSaleFragment()));
-        binding.quickActionsLayout.btnSaleList.setOnClickListener(v->openFragment(new SalesListFragment()));
-        binding.tvSeeAll.setOnClickListener(v->openFragment(new SalesListFragment()));
-        binding.quickActionsLayout.btnDueCollection.setOnClickListener(v->openFragment(new DueCollectionFragment()));
+        binding.quickActionsLayout.btnNewSale.setOnClickListener(v -> openFragment(new NewSaleFragment()));
+        binding.quickActionsLayout.btnSaleList.setOnClickListener(v -> openFragment(new SalesListFragment()));
+        binding.tvSeeAll.setOnClickListener(v -> openFragment(new SalesListFragment()));
+        binding.quickActionsLayout.btnDueCollection.setOnClickListener(v -> openFragment(new DueCollectionFragment()));
+        binding.quickActionsLayout.btnSaleReturns.setOnClickListener(v->openFragment(new SaleReturnFragment()));
 
         binding.toolbar.setNavigationOnClickListener(v -> {
             requireActivity().onBackPressed();
         });
+
         return binding.getRoot();
     }
 
@@ -75,6 +75,7 @@ public class SalesFragment extends Fragment {
 
         showTodayDate();
     }
+
     private void initRecycler() {
 
         adapter = new SalesAdapter();

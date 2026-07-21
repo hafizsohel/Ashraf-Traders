@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.ashraftraders.adapters.DueAdapter;
+import com.example.ashraftraders.data.model.DueModel;
 import com.example.ashraftraders.data.repository.DueRepository;
 import com.example.ashraftraders.databinding.FragmentDueCollectionBinding;
+import com.example.ashraftraders.ui.activities.MainActivity;
 import com.example.ashraftraders.viewmodel.DueViewModel;
 import com.example.ashraftraders.viewmodel.DueViewModelFactory;
 import com.example.ashraftraders.views.CollectDueBottomSheet;
@@ -104,25 +106,58 @@ public class DueCollectionFragment extends Fragment {
 
             adapter.submitList(dueModels);
 
+            double totalDue = 0;
+
+            for (DueModel model : dueModels) {
+                totalDue += model.getDueAmount();
+            }
+
+            binding.txtTotalDue.setText(
+                    String.format("৳ %.0f", totalDue)
+            );
+
         });
 
     }
 
     private void initSearch() {
 
+        binding.searchView.setIconified(false);
+        binding.searchView.clearFocus();
+        binding.searchView.setQueryHint("নাম / ফোন / ইনভয়েস খুঁজুন");
+        binding.searchView.setOnClickListener(v -> {
+            binding.searchView.setIconified(false);
+            binding.searchView.requestFocusFromTouch();
+        });
+
+        binding.searchView.setOnSearchClickListener(v -> {
+            ((MainActivity) requireActivity()).hideBottomNavigation();
+        });
+
+        binding.searchView.setOnCloseListener(() -> {
+            ((MainActivity) requireActivity()).showBottomNavigation();
+            return false;
+        });
+
+        binding.searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                ((MainActivity) requireActivity()).hideBottomNavigation();
+            } else {
+                ((MainActivity) requireActivity()).showBottomNavigation();
+            }
+        });
+
         binding.searchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener() {
 
                     @Override
                     public boolean onQueryTextSubmit(String query) {
-
                         adapter.filter(query);
                         return true;
                     }
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
-
                         adapter.filter(newText);
                         return true;
                     }

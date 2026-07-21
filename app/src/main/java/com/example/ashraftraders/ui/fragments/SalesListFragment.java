@@ -1,5 +1,6 @@
 package com.example.ashraftraders.ui.fragments;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -48,7 +49,7 @@ public class SalesListFragment extends Fragment {
         searchViewSetup();
 
         viewModel.loadRecentSales();
-        SearchView.SearchAutoComplete searchAutoComplete = binding.searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        @SuppressLint("RestrictedApi") SearchView.SearchAutoComplete searchAutoComplete = binding.searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         searchAutoComplete.setHint("Search Customers");
         searchAutoComplete.setHintTextColor(Color.GRAY);
         searchAutoComplete.setTextColor(Color.GRAY);

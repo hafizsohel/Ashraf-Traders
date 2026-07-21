@@ -3,9 +3,11 @@ package com.example.ashraftraders.data.api;
 import com.example.ashraftraders.data.model.BrandModel;
 import com.example.ashraftraders.data.model.DashboardModel;
 import com.example.ashraftraders.data.model.DueModel;
+import com.example.ashraftraders.data.model.InvoiceReturnModel;
 import com.example.ashraftraders.data.model.LoginRequest;
 import com.example.ashraftraders.data.model.ProductModel;
 import com.example.ashraftraders.data.model.SaleModel;
+import com.example.ashraftraders.data.model.SaleReturnItemModel;
 import com.example.ashraftraders.data.model.SalesSummaryModel;
 import com.example.ashraftraders.data.model.UserModel;
 import com.example.ashraftraders.data.model.customer.CustomerModel;
@@ -80,4 +82,13 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("rpc/collect_due_payment")
     Call<Void> collectDuePayment(@Body JsonObject body);
+
+    @POST("rpc/save_sale_return")
+    Call<Void> saveSaleReturn(@Body JsonObject body);
+
+    @POST("rpc/get_invoice_for_return")
+    Call<List<InvoiceReturnModel>> getInvoiceForReturn(@Body JsonObject body);
+
+    @POST("rpc/get_invoice_return_items")
+    Call<List<SaleReturnItemModel>> getInvoiceReturnItems(@Body JsonObject body);
 }

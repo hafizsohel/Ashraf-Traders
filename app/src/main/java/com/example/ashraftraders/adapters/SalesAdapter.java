@@ -96,7 +96,25 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.ViewHolder> 
 
             b.txtDue.setText("Due ৳ " + df.format(model.getDue()));
 
-            if ("Paid".equalsIgnoreCase(model.getStatus())) {
+            Log.d("STATUS",
+                    "Total=" + model.getTotal()
+                            + ", Paid=" + model.getPaid()
+                            + ", Due=" + model.getDue());
+            // Returned
+            if (model.getTotal() <= 0
+                    && model.getPaid() <= 0
+                    && model.getDue() <= 0) {
+
+                b.chipStatus.setText("Returned");
+                b.chipStatus.setTextColor(Color.WHITE);
+
+                b.chipStatus.setChipBackgroundColorResource(
+                        android.R.color.holo_blue_dark
+                );
+            }
+
+            // Paid Logic
+            else if ("Paid".equalsIgnoreCase(model.getStatus())) {
 
                 b.chipStatus.setText("Paid");
 

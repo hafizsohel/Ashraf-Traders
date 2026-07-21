@@ -1,0 +1,58 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Background Circle -->
+    <path
+        android:fillColor="#EEF5F4"
+        android:pathData="M60,60m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0"/>
+
+    <!-- Wifi -->
+    <path
+        android:fillColor="#0F766E"
+        android:pathData="M60,35
+            C47,35 35,40 26,49
+            L31,54
+            C39,47 49,43 60,43
+            C71,43 81,47 89,54
+            L94,49
+            C85,40 73,35 60,35Z"/>
+
+    <path
+        android:fillColor="#26A69A"
+        android:pathData="M60,52
+            C52,52 45,55 39,61
+            L44,66
+            C48,62 54,60 60,60
+            C66,60 72,62 76,66
+            L81,61
+            C75,55 68,52 60,52Z"/>
+
+    <path
+        android:fillColor="#80CBC4"
+        android:pathData="M60,69
+            C56,69 52,71 49,74
+            L54,79
+            C56,77 58,76 60,76
+            C62,76 64,77 66,79
+            L71,74
+            C68,71 64,69 60,69Z"/>
+
+    <!-- Dot -->
+    <path
+        android:fillColor="#004D40"
+        android:pathData="M60,88
+            m-4,0
+            a4,4 0,1 1,8 0
+            a4,4 0,1 1,-8 0"/>
+
+    <!-- Slash -->
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M28,28L92,92
+            L88,96
+            L24,32Z"/>
+
+</vector>

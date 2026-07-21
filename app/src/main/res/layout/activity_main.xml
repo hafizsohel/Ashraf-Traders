@@ -175,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_marginBottom="6dp"
-                    android:text="দ্রুত কাজ"
+                    android:text="মেনু"
                     android:textSize="10sp"
                     android:textColor="#FFFFFF" />
             </FrameLayout>

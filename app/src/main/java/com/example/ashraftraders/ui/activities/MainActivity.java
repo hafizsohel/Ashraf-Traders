@@ -17,6 +17,7 @@ import com.example.ashraftraders.ui.fragments.SalesFragment;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
     public ActivityMainBinding getBinding() {
         return binding;
     }
+    public void hideBottomNavigation() {
+        binding.curvedBottomNavigation.setVisibility(View.GONE);
+    }
+
     public void showBottomNavigation() {
         binding.curvedBottomNavigation.setVisibility(View.VISIBLE);
     }
@@ -97,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragmentContainer, fragment)
                 .commit();
 
+        // Bottom Nav সব Main Fragment-এ Visible থাকবে
         showBottomNavigation();
     }
     public void openHome() {
