@@ -113,6 +113,7 @@ public class SalesRepository {
             public void onResponse(@NonNull Call<List<SaleModel>> call,
                                    @NonNull Response<List<SaleModel>> response) {
 
+
                 if (response.body() != null) {
 
                     for (SaleModel model : response.body()) {

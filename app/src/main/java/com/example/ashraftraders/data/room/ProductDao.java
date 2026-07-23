@@ -48,4 +48,7 @@ public interface ProductDao {
 
     @Query("SELECT DISTINCT productName FROM products ORDER BY productName ASC")
     List<String> getProductNamesSync();
+
+    @Query("SELECT SUM(purchasePrice * stock) FROM products WHERE created_at LIKE :todayDate || '%'")
+    LiveData<Double> getTodayPurchaseAmount(String todayDate);
 }

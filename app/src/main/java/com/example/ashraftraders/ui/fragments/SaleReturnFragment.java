@@ -46,14 +46,19 @@ public class SaleReturnFragment extends Fragment {
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
         adapter = new SaleReturnAdapter();
-
         binding.rvProducts.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvProducts.setAdapter(adapter);
         observeViewModel();
         initClickListener();
-
+        setupToolbar();
 
         return binding.getRoot();
+    }
+
+    private void setupToolbar() {
+
+        binding.toolbar.setNavigationOnClickListener(v ->
+                requireActivity().getSupportFragmentManager().popBackStack());
     }
 
     private void initClickListener() {

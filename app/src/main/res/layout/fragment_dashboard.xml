@@ -1,275 +1,511 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://tools.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- ডাটা মডেল প্রয়োজন হলে এখানে যুক্ত করতে পারেন -->
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/liquid_gradient_bg"
-        tools:context=".ui.fragments.DashboardFragment">
+        android:fillViewport="true">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <!-- Scroll View -->
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScroll"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:fillViewport="true"
-            android:overScrollMode="never"
-            android:paddingBottom="90dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:id="@+id/mainContainer"
+            <!-- Top Header (Dark Green Background) -->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="@color/charcoal_l1"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="24dp">
 
-                <!-- HEADER LAYER -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/headerLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/header_gradient"
-                    android:paddingStart="20dp"
-                    android:paddingTop="20dp"
-                    android:paddingEnd="20dp">
+                <ImageView
+                    android:id="@+id/btnMenu"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_menu"
+                    app:tint="#FFFFFF" />
 
-                    <!-- Menu Card Button -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/menuCard"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        app:cardBackgroundColor="#22FFFFFF"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_menu"
-                            app:tint="@android:color/white" />
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Notification Card -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/notiCard"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        app:cardBackgroundColor="#22FFFFFF"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:layout_width="22dp"
-                                android:layout_height="22dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_notifications"
-                                app:tint="@android:color/white" />
-
-                            <View
-                                android:layout_width="10dp"
-                                android:layout_height="10dp"
-                                android:layout_gravity="top|end"
-                                android:layout_margin="11dp"
-                                android:background="@drawable/badge_bg" />
-
-                        </FrameLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Header Shop Title Name Fix -->
-                    <TextView
-                        android:id="@+id/txtShopName"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:gravity="center"
-                        android:text="Ashraf Traders"
-                        android:textColor="@android:color/white"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/menuCard"
-                        app:layout_constraintEnd_toStartOf="@+id/notiCard"
-                        app:layout_constraintStart_toEndOf="@+id/menuCard"
-                        app:layout_constraintTop_toTopOf="@+id/menuCard" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- TOP SUMMARY SECTION -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardSummaryContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="12dp"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardCornerRadius="28dp"
-                    app:cardElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:paddingStart="12dp"
-                            android:paddingEnd="6dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Top Summary"
-                                android:textColor="#212121"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Today"
-                                android:textColor="@color/primary"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="12dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/cardTotalProduct"
-                                android:layout_width="0dp"
-                                android:layout_height="160dp"
-                                android:layout_weight="1"
-                                android:layout_margin="6dp">
-
-                                <include
-                                    android:id="@+id/layoutTotalProduct"
-                                    layout="@layout/item_top_summary"/>
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/cardTodaySales"
-                                android:layout_width="0dp"
-                                android:layout_height="160dp"
-                                android:layout_weight="1"
-                                android:layout_margin="6dp">
-
-                                <include
-                                    android:id="@+id/layoutTodaySales"
-                                    layout="@layout/item_top_summary"/>
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/cardTodayPurchase"
-                                android:layout_width="0dp"
-                                android:layout_height="160dp"
-                                android:layout_weight="1"
-                                android:layout_margin="6dp">
-
-                                <include
-                                    android:id="@+id/layoutTodayPurchase"
-                                    layout="@layout/item_top_summary"/>
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/cardLowStock"
-                                android:layout_width="0dp"
-                                android:layout_height="160dp"
-                                android:layout_weight="1"
-                                android:layout_margin="6dp">
-
-                                <include
-                                    android:id="@+id/layoutLowStock"
-                                    layout="@layout/item_top_summary"/>
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- STATISTICS TITLE SECTION -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="20dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/btnMenu"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Statistics"
-                        android:textColor="#212121"
+                        android:text="আশরাফ ট্রেডার্স"
+                        android:textColor="#FFFFFF"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="View All"
-                        android:textColor="@color/primary"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:text="Ashraf Traders"
+                        android:textColor="#D0E3D8"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
-                <Space
+                <ImageView
+                    android:id="@+id/btnNotification"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_notifications"
+                    app:tint="#FFFFFF" />
+
+            </RelativeLayout>
+
+            <!-- Main Content Area -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <!-- Summary Grid Container Card -->
+                <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="1dp"
+                    app:strokeColor="#E2E8F0"
+                    app:strokeWidth="1dp">
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2"
+                        android:padding="10dp"
+                        android:rowCount="3">
+
+                        <!-- 1. আজকের বিক্রয় (Soft Mint Green) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="6dp"
+                            app:cardBackgroundColor="#F0FDF4"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#BBF7D0"
+                            app:strokeWidth="1.5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="14dp">
+
+                                <TextView
+                                    android:id="@+id/lblSale"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="আজকের বিক্রয়"
+                                    android:textColor="#475569"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvTodaySale"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/lblSale"
+                                    android:layout_marginTop="6dp"
+                                    android:text="৳ 25,430"
+                                    android:textColor="#064E3B"
+                                    android:textSize="19sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    app:cardBackgroundColor="#DCFCE7"
+                                    app:cardCornerRadius="12dp"
+                                    app:cardElevation="0dp"
+                                    app:strokeWidth="0dp">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_shop"
+                                        app:tint="#059669" />
+                                </com.google.android.material.card.MaterialCardView>
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- 2. মোট প্রোডাক্ট (Soft Warm Amber) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="6dp"
+                            app:cardBackgroundColor="#FEFCE8"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#FEF08A"
+                            app:strokeWidth="1.5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="14dp">
+
+                                <TextView
+                                    android:id="@+id/lblProduct"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="মোট প্রোডাক্ট"
+                                    android:textColor="#475569"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvTotalProduct"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/lblProduct"
+                                    android:layout_marginTop="6dp"
+                                    android:text="1,250"
+                                    android:textColor="#78350F"
+                                    android:textSize="19sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    app:cardBackgroundColor="#FEF3C7"
+                                    app:cardCornerRadius="12dp"
+                                    app:cardElevation="0dp"
+                                    app:strokeWidth="0dp">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_box"
+                                        app:tint="#D97706" />
+                                </com.google.android.material.card.MaterialCardView>
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- 3. আজকের ক্রয় (Soft Ice Sky Blue) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="6dp"
+                            app:cardBackgroundColor="#F0F9FF"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#BAE6FD"
+                            app:strokeWidth="1.5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="14dp">
+
+                                <TextView
+                                    android:id="@+id/lblBuy"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="আজকের ক্রয়"
+                                    android:textColor="#475569"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvTodayBuy"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/lblBuy"
+                                    android:layout_marginTop="6dp"
+                                    android:text="৳ 20,000"
+                                    android:textColor="#0C4A6E"
+                                    android:textSize="19sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    app:cardBackgroundColor="#E0F2FE"
+                                    app:cardCornerRadius="12dp"
+                                    app:cardElevation="0dp"
+                                    app:strokeWidth="0dp">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_new_sale"
+                                        app:tint="#0284C7" />
+                                </com.google.android.material.card.MaterialCardView>
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- 4. বকেয়া (Soft Rose Coral) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="6dp"
+                            app:cardBackgroundColor="#FFF1F2"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#FECDD3"
+                            app:strokeWidth="1.5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="14dp">
+
+                                <TextView
+                                    android:id="@+id/lblDue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="বকেয়া"
+                                    android:textColor="#475569"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvTotalDue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/lblDue"
+                                    android:layout_marginTop="6dp"
+                                    android:text="৳ 52,300"
+                                    android:textColor="#9F1239"
+                                    android:textSize="19sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    app:cardBackgroundColor="#FFE4E6"
+                                    app:cardCornerRadius="12dp"
+                                    app:cardElevation="0dp"
+                                    app:strokeWidth="0dp">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_due_collection"
+                                        app:tint="#E11D48" />
+                                </com.google.android.material.card.MaterialCardView>
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- 5. মোট অর্ডার (Soft Lavender Indigo) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="6dp"
+                            app:cardBackgroundColor="#EEF2FF"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#C7D2FE"
+                            app:strokeWidth="1.5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="14dp">
+
+                                <TextView
+                                    android:id="@+id/lblTotalOrders"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="মোট অর্ডার"
+                                    android:textColor="#475569"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvTotalOrders"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/lblTotalOrders"
+                                    android:layout_marginTop="6dp"
+                                    android:text="342"
+                                    android:textColor="#312E81"
+                                    android:textSize="19sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    app:cardBackgroundColor="#E0E7FF"
+                                    app:cardCornerRadius="12dp"
+                                    app:cardElevation="0dp"
+                                    app:strokeWidth="0dp">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_nav_orders"
+                                        app:tint="#4F46E5" />
+                                </com.google.android.material.card.MaterialCardView>
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- 6. মোট লাভ (Soft Fresh Lime) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="6dp"
+                            app:cardBackgroundColor="#F7FEE7"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#D9F99D"
+                            app:strokeWidth="1.5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="14dp">
+
+                                <TextView
+                                    android:id="@+id/lblTotalProfit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="মোট লাভ"
+                                    android:textColor="#475569"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvTotalProfit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/lblTotalProfit"
+                                    android:layout_marginTop="6dp"
+                                    android:text="৳ 6,680"
+                                    android:textColor="#3F6212"
+                                    android:textSize="19sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    app:cardBackgroundColor="#ECFCCB"
+                                    app:cardCornerRadius="12dp"
+                                    app:cardElevation="0dp"
+                                    app:strokeWidth="0dp">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_inventory"
+                                        app:tint="#65A30D" />
+                                </com.google.android.material.card.MaterialCardView>
+                            </RelativeLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </GridLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!-- Section Header: দ্রুত অ্যাকশন -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="দ্রুত অ্যাকশন"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+
+                <!-- Quick Action Container Card -->
+
+                <include android:id="@+id/quickActionsLayout"
+                    layout="@layout/item_quick_action" />
+
+                <!-- Section Header: সাম্প্রতিক বিক্রয় -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="সাম্প্রতিক বিক্রয় "
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSeeAllSale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="সব দেখুন"
+                        android:textColor="#00897B"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Recent Transactions List / RecyclerView Container -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvRecentSales"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never" />
 
             </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

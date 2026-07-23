@@ -32,6 +32,8 @@ public class ProductModel {
     @SerializedName("stock")
     private Integer stock;
 
+    @SerializedName("created_at")
+    private String createdDate;
     // --- Getters and Setters ---
 
     public Long getId() {
@@ -98,6 +100,14 @@ public class ProductModel {
         this.salePrice = salePrice;
     }
 
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
     @Override
     public String toString() {
         return "ProductModel{" +
@@ -109,6 +119,7 @@ public class ProductModel {
                 ", purchasePrice=" + purchasePrice +
                 ", salePrice=" + salePrice +
                 ", stock=" + stock +
+                ", createdDate='" + createdDate + '\'' +
                 '}';
     }
 }

@@ -1,66 +1,134 @@
 package com.example.ashraftraders.ui.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.ashraftraders.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProductFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.ashraftraders.adapters.ProductAdapter;
+import com.example.ashraftraders.data.model.ProductModel;
+import com.example.ashraftraders.data.repository.ProductRepository;
+import com.example.ashraftraders.data.room.AppDatabase;
+import com.example.ashraftraders.databinding.FragmentProductBinding;
+import com.example.ashraftraders.viewmodel.ProductViewModel;
+import com.example.ashraftraders.viewmodel.ProductViewModelFactory;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class ProductFragment extends Fragment {
+    private FragmentProductBinding binding;
+    private ProductViewModel viewModel;
+    private ProductAdapter adapter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ProductFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProductFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ProductFragment newInstance(String param1, String param2) {
-        ProductFragment fragment = new ProductFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentProductBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        requireActivity().getWindow().setStatusBarColor(Color.parseColor("#0B6A5D"));
+
+        ProductRepository repository = new ProductRepository(AppDatabase.getInstance(requireContext()).productDao());
+        viewModel = new ViewModelProvider(this, new ProductViewModelFactory(repository)).get(ProductViewModel.class);
+
+        initRecyclerView();
+        setupSearchView();
+
+        // [ম্যাজিক ফিক্স] ইন্টারনেট চেকিং বা কোনো প্রকার আর্টিফিশিয়াল লোডিং সব বাদ দেওয়া হলো
+        if (binding.loadingOverlay != null) binding.loadingOverlay.setVisibility(View.GONE);
+        // ডেটা অবজার্ভার এবং ব্যাকগ্রাউন্ড সিঙ্ক চালু
+        observeProducts();
+        viewModel.syncProducts();
+        binding.btnBack.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
+
+    }
+
+    private void initRecyclerView() {
+        adapter = new ProductAdapter();
+        binding.rvProducts.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.rvProducts.setHasFixedSize(true);
+        binding.rvProducts.setNestedScrollingEnabled(false); // লেআউটের ঝাঁকুনি বন্ধ করার জন্য
+        binding.rvProducts.setAdapter(adapter);
+    }
+
+    private void observeProducts() {
+        viewModel.getProducts().observe(getViewLifecycleOwner(), products -> {
+            // [ফ্লিঙ্কারিং ফিক্স] যদি ডেটা এখনো না আসে বা নাল থাকে, তবে স্ক্রিনের ভিউ টাচই করবে না।
+            // এর ফলে এক্সএমএল বা পূর্বের স্ট্যাটিক ডেটা বিন্দুমাত্র লাফালাফি করার সুযোগ পাবে না।
+            Log.d("UI", "Products = " + (products == null ? 0 : products.size()));
+
+            if (products == null) {
+                return;
+            }
+            adapter.updateData(products);
+            updateUI(products);
+        });
+    }
+
+    private void updateUI(@NonNull List<ProductModel> products) {
+        adapter.setProducts(products);
+
+        int totalProducts = products.size();
+        int totalStock = 0;
+        double totalPurchasePrice = 0.0;
+        Set<String> uniqueBrands = new HashSet<>();
+
+        for (ProductModel product : products) {
+            totalStock += product.getStock();
+            totalPurchasePrice += (product.getPurchasePrice() * product.getStock());
+
+            if (product.getBrandName() != null && !product.getBrandName().trim().isEmpty()) {
+                uniqueBrands.add(product.getBrandName().trim());
+            }
         }
+
+        // সব টেক্সট একসাথে একই ন্যানোসেকেন্ডে আপডেট হবে
+        binding.tvTotalProduct.setText(String.valueOf(totalProducts));
+        binding.tvTotalStock.setText(String.valueOf(totalStock));
+        binding.tvBrand.setText(String.valueOf(uniqueBrands.isEmpty() ? 1 : uniqueBrands.size()));
+        binding.tvTotalPurchase.setText("৳" + String.format("%,.0f", totalPurchasePrice));
+    }
+
+
+    private void setupSearchView() {
+        binding.searchView.setQueryHint("Search Product");
+        // Default এ focus থাকবে না
+        binding.searchView.clearFocus();
+        binding.searchView.setFocusable(false);
+        binding.searchView.setIconifiedByDefault(false);
+        binding.searchView.setIconified(true);
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                viewModel.searchProducts(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                viewModel.searchProducts(newText);
+                return true;
+            }
+        });
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product, container, false);
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

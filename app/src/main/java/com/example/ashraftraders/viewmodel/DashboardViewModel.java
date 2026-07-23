@@ -1,8 +1,13 @@
 package com.example.ashraftraders.viewmodel;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import com.example.ashraftraders.data.room.ProductDao;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class DashboardViewModel extends ViewModel {
 
@@ -22,7 +27,12 @@ public class DashboardViewModel extends ViewModel {
     }
 
     public LiveData<Double> getTotalPurchase() {
-        return productDao.getTotalPurchaseAmount();
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+        return Transformations.map(productDao.getTodayPurchaseAmount(today), total -> {
+            // যদি ডাটাবেজ null ফেরত দেয়, তবে 0.0 পাঠাবে
+            return (total != null) ? total : 0.0;
+        });
     }
 
     public LiveData<Integer> getLowStockCount() {

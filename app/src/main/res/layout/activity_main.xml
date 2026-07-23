@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -6,6 +7,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,166 +21,374 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Bottom Navigation -->
+        <!-- Overlay View (When menu is opened) -->
+        <View
+            android:id="@+id/menuOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:background="#66000000"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- RADIAL CONTAINER (Full Width for end-to-end curve) -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/curvedBottomNavigation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/nav_bar_horizontal_margin"
-            android:layout_marginEnd="@dimen/nav_bar_horizontal_margin"
-            android:layout_marginBottom="16dp"
+            android:id="@+id/radialContainer"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
             android:clipChildren="false"
             android:clipToPadding="false"
+            android:paddingBottom="24dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!-- Custom Full-Width Dome Background -->
+            <com.example.ashraftraders.views.DomeBackgroundView
+                android:id="@+id/domeBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0"
+                android:scaleX="0.3"
+                android:scaleY="0.3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- 1. সেটিংস (Top Center) -->
+            <LinearLayout
+                android:id="@+id/radialItem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_nav_profile"
+                        app:tint="#004D40" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:text="সেটিংস"
+                    android:textColor="#334155"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!-- 3. রিপোর্ট (Mid-Right) -->
+            <LinearLayout
+                android:id="@+id/radialItem3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_nav_products"
+                        app:tint="#004D40" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:text="রিপোর্ট"
+                    android:textColor="#334155"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!-- 4. সাপোর্ট (Left) -->
+            <LinearLayout
+                android:id="@+id/radialItem4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_nav_grid"
+                        app:tint="#004D40" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:text="সাপোর্ট"
+                    android:textColor="#334155"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!-- 5. সেটিংস (Right) -->
+            <LinearLayout
+                android:id="@+id/radialItemSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_setting"
+                        app:tint="#004D40" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:text="সেটিংস"
+                    android:textColor="#334155"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!-- 5. সেটিংস (Top Center) -->
+            <LinearLayout
+                android:id="@+id/radialItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="0dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_nav_profile"
+                        app:tint="#004D40" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:text="সেটিংস"
+                    android:textColor="#334155"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- CURVED BOTTOM NAVIGATION BAR -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/curvedBottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <com.example.ashraftraders.views.CurvedNavBackgroundView
+                android:id="@+id/curvedNavBackground"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/nav_bar_height"
+                android:layout_height="64dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
+            <!-- ড্যাশবোর্ড (Active Item) -->
             <LinearLayout
                 android:id="@+id/itemHome"
-                android:layout_width="49dp"
-                android:layout_height="41dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:paddingHorizontal="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
-                app:layout_constraintStart_toStartOf="@id/curvedBottomNavigation"
-                app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation">
+                android:paddingHorizontal="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="@dimen/nav_icon_size"
-                    android:layout_height="@dimen/nav_icon_size"
-                    android:src="@drawable/ic_nav_home" />
+                    android:id="@+id/imgHome"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_nav_home"
+                    app:tint="#FBBF24" />
 
                 <TextView
+                    android:id="@+id/txtHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="4dp"
-                    android:text="হোম"
-                    android:textColor="@android:color/white"
-                    android:textSize="11sp" />
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:text="ড্যাশবোর্ড"
+                    android:textColor="#FBBF24"
+                    android:textSize="10sp" />
             </LinearLayout>
-            <!--   PRODUCTS   -->
+
+            <!-- বিক্রয় (Inactive Item) -->
             <LinearLayout
                 android:id="@+id/itemSales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:paddingHorizontal="6dp"
-                app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
-                app:layout_constraintEnd_toStartOf="@id/gridButton"
-                app:layout_constraintHorizontal_bias="0.6"
-                app:layout_constraintStart_toEndOf="@id/itemHome"
-                app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation">
+                android:paddingHorizontal="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="@dimen/nav_icon_size"
-                    android:layout_height="@dimen/nav_icon_size"
-                    android:layout_marginStart="2dp"
-                    android:src="@drawable/ic_nav_orders" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="4dp"
-                    android:text="বিক্রয়"
-                    android:textColor="@color/nav_text_inactive"
-                    android:textSize="11sp" />
-            </LinearLayout>
-            <!--   ORDERS   -->
-            <LinearLayout
-                android:id="@+id/itemProducts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingHorizontal="4dp"
-                app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
-                app:layout_constraintEnd_toStartOf="@id/itemProfile"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@id/gridButton"
-                app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation">
-
-                <ImageView
-                    android:layout_width="@dimen/nav_icon_size"
-                    android:layout_height="@dimen/nav_icon_size"
-                    android:src="@drawable/ic_nav_products" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="মজুদ"
-                    android:textColor="@color/nav_text_inactive"
-                    android:textSize="11sp" />
-            </LinearLayout>
-            <!--   PROFILE   -->
-            <LinearLayout
-                android:id="@+id/itemProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingHorizontal="4dp"
-                app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
-                app:layout_constraintEnd_toEndOf="@id/curvedBottomNavigation"
-                app:layout_constraintHorizontal_bias="0.78"
-                app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation">
-
-                <ImageView
-                    android:layout_width="@dimen/nav_icon_size"
-                    android:layout_height="@dimen/nav_icon_size"
-                    android:src="@drawable/ic_nav_profile" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="2dp"
-                    android:text="প্রোফাইল"
-                    android:textColor="@color/nav_text_inactive"
-                    android:textSize="11sp" />
-            </LinearLayout>
-            <!--   Elevated circular GRID button, floating above the bar in the middle.
-                              This is just a click target/button - NOT a fragment container.   -->
-            <FrameLayout
-                android:id="@+id/gridButton"
-                android:layout_width="@dimen/nav_grid_button_size"
-                android:layout_height="@dimen/nav_grid_button_size"
-                android:elevation="6dp"
-                app:layout_constraintBottom_toBottomOf="@id/curvedBottomNavigation"
-                app:layout_constraintEnd_toEndOf="@id/curvedBottomNavigation"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@id/curvedBottomNavigation"
-                app:layout_constraintTop_toTopOf="@id/curvedBottomNavigation"
-                app:layout_constraintVertical_bias="0.35">
-
-                <ImageView
+                    android:id="@+id/imgSales"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:layout_gravity="center_horizontal|top"
-                    android:layout_marginTop="12dp"
-                    android:src="@drawable/ic_nav_grid" />
+                    android:src="@drawable/ic_nav_orders"
+                    app:tint="#FBBF24" />
 
                 <TextView
+                    android:id="@+id/txtSales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="6dp"
-                    android:text="মেনু"
-                    android:textSize="10sp"
-                    android:textColor="#FFFFFF" />
-            </FrameLayout>
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:text="প্রোডাক্ট লিস্ট"
+                    android:textColor="#FBBF24"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!-- সেন্টার 'আরও' floating বাটন -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/gridButton"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#A855F7"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.1"
+                app:strokeColor="#FBBF24"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgGridIcon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_nav_grid"
+                        app:tint="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/txtMore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:includeFontPadding="false"
+                        android:text="আরও"
+                        android:textColor="#FFFFFF"
+                        android:textSize="9sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

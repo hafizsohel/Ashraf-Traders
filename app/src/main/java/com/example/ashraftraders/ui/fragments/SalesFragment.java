@@ -54,12 +54,14 @@ public class SalesFragment extends Fragment {
         observeSummary();
         loadData();
         clickEvents();
+/*
 
         binding.quickActionsLayout.btnNewSale.setOnClickListener(v -> openFragment(new NewSaleFragment()));
         binding.quickActionsLayout.btnSaleList.setOnClickListener(v -> openFragment(new SalesListFragment()));
         binding.tvSeeAll.setOnClickListener(v -> openFragment(new SalesListFragment()));
         binding.quickActionsLayout.btnDueCollection.setOnClickListener(v -> openFragment(new DueCollectionFragment()));
         binding.quickActionsLayout.btnSaleReturns.setOnClickListener(v->openFragment(new SaleReturnFragment()));
+*/
 
         binding.toolbar.setNavigationOnClickListener(v -> {
             requireActivity().onBackPressed();

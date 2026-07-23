@@ -1,6 +1,7 @@
 package com.example.ashraftraders.data.room.entity;
 
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -16,7 +17,10 @@ public class ProductEntity {
     private double salePrice;
     private int stock;
 
-    public ProductEntity(long id, String productCode, String productName, String brandName, double purchasePrice,double salePrice,int stock) {
+    @ColumnInfo(name = "created_at")
+    private String createdDate;
+
+    public ProductEntity(long id, String productCode, String productName, String brandName, double purchasePrice, double salePrice, int stock, String createdDate) {
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
@@ -24,6 +28,7 @@ public class ProductEntity {
         this.purchasePrice = purchasePrice;
         this.salePrice = salePrice;
         this.stock = stock;
+        this.createdDate = createdDate;
     }
 
     // Getters
@@ -36,5 +41,13 @@ public class ProductEntity {
 
     public double getSalePrice() {
         return salePrice;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 }

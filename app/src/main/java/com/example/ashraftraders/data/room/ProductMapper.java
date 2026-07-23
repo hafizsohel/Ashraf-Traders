@@ -24,8 +24,8 @@ public class ProductMapper {
 
                 model.getPurchasePrice(),
                 model.getSalePrice(),
-
-                model.getStock()
+                model.getStock(),
+                model.getCreatedDate()
 
         );
 
@@ -61,6 +61,7 @@ public class ProductMapper {
         model.setSalePrice(entity.getSalePrice());
 
         model.setStock(entity.getStock());
+        model.setCreatedDate(model.getCreatedDate());
 
         return model;
 
